@@ -2,6 +2,7 @@
 
 The will contain three sections 
 
- - Backend (Python)
- - Frontend (Javascript)
+ - Backend (Python/Flask)
+ - Database (MySQL)
+ - Frontend (Javascript/React)
  - Mobile App for both IOS and Android (Dart)
