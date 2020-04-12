@@ -1,1 +1,7 @@
 == SomNOG App
+
+The will contain three sections 
+ - Backend (Python)
+ - Frontend (Javascript)
+ - Mobile App for both IOS and Android (Dart)
+ 
