@@ -18,3 +18,4 @@ def speakerApi():
     api.add_resource(AddSpeaker, '/v1/speaker')
     # Get all speakers
     api.add_resource(GetAllSpeakers, '/v1/speaker')
+
