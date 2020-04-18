@@ -1,0 +1,5 @@
+=== Documentation 
+
+`yarn start ` Starts frontend application 
+`yarn start-api` Starts backend API 
+
