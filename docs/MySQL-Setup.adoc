@@ -1,0 +1,64 @@
+== Setup instructions
+
+Setting up mysql on mac with sequel pro and homebrew
+
+`
+MacOS Catalina
+Homebrew Version 2.2.12
+`
+
+Assuming you've installed homebrew...
+
+=== Install mysql with homebrew
+
+ $ brew install mysql
+
+=== Start your mysql server
+
+
+ $ brew services start mysql
+
+
+you can stop the server: `$ brew services stop mysql`
+
+=== Go through the mysql secure installation workflow
+
+`
+$ mysql_secure_installation
+`
+
+then enter all the infos, you'll set your password etc etc...
+
+
+=== Enter the mysql command prompt & alter your user info
+
+
+ $ mysql -u root -p
+
+
+then fill in your password
+
+ $ password: <insert your thing>
+
+
+==== change your user info to handle this error `MySQL said: Authentication plugin 'caching_sha2_password' cannot be loaded: dlopen(/usr/local/lib/plugin/caching_sha2_password.so, 2): image not found`
+
+```
+ALTER USER '<username>'@'<localhost>' IDENTIFIED WITH mysql_native_password BY '<your_password>'
+```
+- username: root
+- localhost: localhost
+- your_password: `************`
+
+
+## you should be set up now + download and install sequel pro
+
+Download and install [Sequel Pro](https://sequelpro.com/) for nicer views into your databases
+
+## Using sequel pro
+
+![image of sequel pro interface](https://user-images.githubusercontent.com/3622055/46548226-6b923f00-c89c-11e8-929c-bc7d3cbd8ed3.png)
+
+## References:
+
+- https://www.youtube.com/watch?v=ltYNt44c2xo

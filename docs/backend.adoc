@@ -1,0 +1,13 @@
+  . /Users/apple/.local/share/virtualenvs/backend-RpKsNsGj/bin/activate
+
+
+==== Resources 
+
+https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
+
+https://auth0.com/blog/developing-restful-apis-with-python-and-flask/
+
+=== configure Python to python3 by default
+
+`ln -s -f /usr/local/bin/python3.7 /usr/local/bin/python`
+
