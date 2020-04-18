@@ -11,3 +11,5 @@ https://auth0.com/blog/developing-restful-apis-with-python-and-flask/
 
 `ln -s -f /usr/local/bin/python3.7 /usr/local/bin/python`
 
+To push the current branch and set the remote as upstream, use
+    `git push --set-upstream origin backend`
