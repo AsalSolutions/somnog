@@ -14,9 +14,4 @@ https://auth0.com/blog/developing-restful-apis-with-python-and-flask/
 To push the current branch and set the remote as upstream, use
     `git push --set-upstream origin backend`
 
-
-    FLASK_APP=app.py
-FLASK_ENV=development
-'package.json'
-"start-api": "cd .. && cd backend && pipenv shell flask run  --no-debugger",
-
+The git repository at '/Users/apple/Projects/Development/SomNOG' has too many active changes, only a subset of Git features will be enabled.    
