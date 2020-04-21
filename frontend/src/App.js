@@ -1,43 +1,20 @@
 import React from "react";
+import { Router, Route } from "react-router-dom";
+import history from "./history";
+import SpeakerList from "./components/SpeakerList";
+import Home from "./pages/Home";
+import Header from "./layout/header";
 
-class App extends React.Component {
-  state = { speakerList: {}, isLoading: true };
-  componentDidMount() {
-    fetch("/v1/speaker")
-      .then((response) => response.json())
-      .then((result) => {
-        this.setState({ speakerList: result, isLoading: false });
-      });
-  }
-  speakerList = () => {
-    const { speakerList, isLoading } = this.state;
-    if (isLoading) {
-      return;
-    }
-    return speakerList.map((speaker, index) => {
-      return (
-        <div>
-          <ul>
-            <li key={speaker._id}>FirstName: {speaker.firstName}</li>
-            <li>LastName: {speaker.lastName}</li>
-            <li>Email: {speaker.email}</li>
-            <li>Company: {speaker.companyName}</li>
-            <li>Job Title: {speaker.jobTitle}</li>
-          </ul>
-        </div>
-      );
-    });
-  };
-  render() {
-    return (
+function App() {
+  return (
+    <Router history={history}>
+      <Header />
       <div>
-        {/* <SpeakerList speaker={this.state.speakerList} /> */}
-
-        <p>Speakers List</p>
-        <div>{this.speakerList()}</div>
+        <Route path="/" exact component={Home} />
+        <Route path="/speaker" exact component={SpeakerList} />
       </div>
-    );
-  }
+    </Router>
+  );
 }
 
 export default App;
