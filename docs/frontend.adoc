@@ -1,5 +1,9 @@
 === Documentation 
-
+`create-react-app`
 `yarn start ` Starts frontend application 
 `yarn start-api` Starts backend API 
+
+=== Install required libraries 
+ yarn add axios lodash react-redux react-router-dom redux redux-form redux-thunk
+
 
