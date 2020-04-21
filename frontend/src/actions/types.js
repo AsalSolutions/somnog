@@ -1,0 +1,6 @@
+// SPEAKERS
+export const CREATE_SPEAKER = "CREATE_SPEAKER";
+export const GET_SPEAKERS = "GET_SPEAKERS";
+export const DELETE_SPEAKER = "DELETE_SPEAKER";
+export const UPDATE_SPEAKER = "UPDATE_SPEAKER";
+export const GET_SPEAKER = "GET_SPEAKER";
