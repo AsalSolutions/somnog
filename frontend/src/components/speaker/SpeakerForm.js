@@ -64,3 +64,25 @@ class SpeakerForm extends Component {
     );
   }
 }
+
+const validateForm = (formValues) => {
+  const errors = {};
+  if (!formValues.firstName) {
+    return (errors.firstName = "FirstName is required");
+  }
+  if (!formValues.lastName) {
+    return (errors.lastName = "LastName is required");
+  }
+  if (!formValues.email) {
+    return (errors.email = "Email is required");
+  }
+  if (!formValues.phone) {
+    return (errors.phone = "Phone is required");
+  }
+  return errors;
+};
+
+reduxForm({
+  form: "speakerForm",
+  validate: validateForm,
+})(SpeakerForm);
