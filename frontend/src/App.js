@@ -1,9 +1,9 @@
 import React from "react";
 import { Router, Route } from "react-router-dom";
 import history from "./history";
-import SpeakerList from "./components/SpeakerList";
-import Home from "./pages/Home";
-import Header from "./layout/header";
+import SpeakerList from "./components/speaker/SpeakerList";
+import Home from "./components/pages/Home";
+import Header from "./components/layout/header";
 
 function App() {
   return (
