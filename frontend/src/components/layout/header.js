@@ -11,6 +11,9 @@ function Header() {
         <li>
           <Link to="/speaker"> Speakers</Link>
         </li>
+        <li>
+          <Link to="/speaker/create"> Add Speaker</Link>
+        </li>
       </ul>
     </div>
   );

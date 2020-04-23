@@ -7,7 +7,7 @@ class SpeakerForm extends Component {
     return (
       <div>
         <label>{formProps.label}</label>
-        <input {...formProps.label} />
+        <input {...formProps.input} />
         {this.renderError(formProps.meta)}
       </div>
     );
@@ -20,13 +20,15 @@ class SpeakerForm extends Component {
   };
 
   // Handle form when submit btn is pressed
-  onSubmit = () => {
+  submitValues = (formValues) => {
     this.props.onSubmit(formValues);
+    console.log(formValues);
   };
+
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit(this.onSubmit)}>
+        <form onSubmit={this.props.handleSubmit(this.submitValues)}>
           <Field
             name="firstName"
             component={this.inputRender}
@@ -59,6 +61,7 @@ class SpeakerForm extends Component {
             component={this.inputRender}
             label="Social Account"
           />
+          <button>Add Speaker</button>
         </form>
       </div>
     );
@@ -82,7 +85,7 @@ const validateForm = (formValues) => {
   return errors;
 };
 
-reduxForm({
+export default reduxForm({
   form: "speakerForm",
   validate: validateForm,
 })(SpeakerForm);
