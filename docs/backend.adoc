@@ -21,3 +21,6 @@ FLASK_ENV=development
 "start-api": "cd .. && cd backend && pipenv shell flask run  --no-debugger",
 
 https://medium.com/web-developer/localhost-8080-https-my-app-dev-create-secure-urls-for-the-local-development-environment-2312b0658405
+
+
+`pipenv install flask-cors` for dealing with same origin policy 
