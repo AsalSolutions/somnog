@@ -28,6 +28,9 @@ class SpeakerApi(Resource):
 
 
 class AddSpeaker(Resource):
+    def validate(self):
+        pass
+
     def post(self):
 
         fistName = request.json['firstName']
@@ -39,8 +42,7 @@ class AddSpeaker(Resource):
         jobTitle = request.json['jobTitle']
         photo = request.json['photo']
         socialAccount = request.json['socialAccount']
-        print(fistName, lastName, email, phone, description,
-              companyName, jobTitle, photo, socialAccount)
+
         # init object from Speaker class
         newSpeaker = Speaker(fistName, lastName, email, phone,
                              description, companyName, jobTitle, photo, socialAccount)
