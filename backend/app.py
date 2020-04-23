@@ -1,5 +1,9 @@
+from flask_cors import CORS, cross_origin
 from routes import speakerApi, runApp
 from db import app
+
+# This should be removed on production
+CORS(app)
 
 
 @app.route("/")
