@@ -8,7 +8,7 @@ class SpeakerForm extends Component {
       <div>
         <label>{formProps.label}</label>
         <input {...formProps.input} />
-        {this.renderError(formProps.meta)}
+        <span>{this.renderError(formProps.meta)}</span>
       </div>
     );
   };
@@ -22,7 +22,6 @@ class SpeakerForm extends Component {
   // Handle form when submit btn is pressed
   submitValues = (formValues) => {
     this.props.onSubmit(formValues);
-    console.log(formValues);
   };
 
   render() {
@@ -55,7 +54,8 @@ class SpeakerForm extends Component {
             name="description"
             component={this.inputRender}
             label="Description"
-          />
+          />{" "}
+          <Field name="photo" component={this.inputRender} label="Photo Url" />
           <Field
             name="socialAccount"
             component={this.inputRender}
@@ -71,16 +71,16 @@ class SpeakerForm extends Component {
 const validateForm = (formValues) => {
   const errors = {};
   if (!formValues.firstName) {
-    return (errors.firstName = "FirstName is required");
+    errors.firstName = "FirstName is required";
   }
   if (!formValues.lastName) {
-    return (errors.lastName = "LastName is required");
+    errors.lastName = "LastName is required";
   }
   if (!formValues.email) {
-    return (errors.email = "Email is required");
+    errors.email = "Email is required";
   }
   if (!formValues.phone) {
-    return (errors.phone = "Phone is required");
+    errors.phone = "Phone is required";
   }
   return errors;
 };
