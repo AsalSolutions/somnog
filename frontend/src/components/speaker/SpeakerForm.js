@@ -7,8 +7,8 @@ class SpeakerForm extends Component {
     return (
       <div>
         <label>{formProps.label}</label>
-        <input {...formProps.label} />
-        {this.renderError(formProps.meta)}
+        <input {...formProps.input} />
+        <span>{this.renderError(formProps.meta)}</span>
       </div>
     );
   };
@@ -20,13 +20,14 @@ class SpeakerForm extends Component {
   };
 
   // Handle form when submit btn is pressed
-  onSubmit = () => {
+  submitValues = (formValues) => {
     this.props.onSubmit(formValues);
   };
+
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit(this.onSubmit)}>
+        <form onSubmit={this.props.handleSubmit(this.submitValues)}>
           <Field
             name="firstName"
             component={this.inputRender}
@@ -53,12 +54,14 @@ class SpeakerForm extends Component {
             name="description"
             component={this.inputRender}
             label="Description"
-          />
+          />{" "}
+          <Field name="photo" component={this.inputRender} label="Photo Url" />
           <Field
             name="socialAccount"
             component={this.inputRender}
             label="Social Account"
           />
+          <button>Add Speaker</button>
         </form>
       </div>
     );
@@ -68,21 +71,21 @@ class SpeakerForm extends Component {
 const validateForm = (formValues) => {
   const errors = {};
   if (!formValues.firstName) {
-    return (errors.firstName = "FirstName is required");
+    errors.firstName = "FirstName is required";
   }
   if (!formValues.lastName) {
-    return (errors.lastName = "LastName is required");
+    errors.lastName = "LastName is required";
   }
   if (!formValues.email) {
-    return (errors.email = "Email is required");
+    errors.email = "Email is required";
   }
   if (!formValues.phone) {
-    return (errors.phone = "Phone is required");
+    errors.phone = "Phone is required";
   }
   return errors;
 };
 
-reduxForm({
+export default reduxForm({
   form: "speakerForm",
   validate: validateForm,
 })(SpeakerForm);

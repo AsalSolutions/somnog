@@ -1,30 +1,26 @@
 import React from "react";
+import { connect } from "react-redux";
+import { getSpeakers } from "../../actions/speaker";
 
-class App extends React.Component {
-  state = { speakerList: {}, isLoading: true };
+class SpeakerList extends React.Component {
   componentDidMount() {
-    fetch("/v1/speaker")
-      .then((response) => response.json())
-      .then((result) => {
-        this.setState({ speakerList: result, isLoading: false });
-      });
+    this.props.getSpeakers();
   }
+
   speakerList = () => {
-    const { speakerList, isLoading } = this.state;
-    if (isLoading) {
-      return;
+    const { getAllSpeakers } = this.props;
+    if (!getAllSpeakers) {
+      return "loading";
     }
-    return speakerList.map((speaker) => {
+    return getAllSpeakers.map((speaker) => {
       return (
-        <div>
-          <ul>
-            <li key={speaker._id}>FirstName: {speaker.firstName}</li>
-            <li>LastName: {speaker.lastName}</li>
-            <li>Email: {speaker.email}</li>
-            <li>Company: {speaker.companyName}</li>
-            <li>Job Title: {speaker.jobTitle}</li>
-          </ul>
-        </div>
+        <ul key={speaker._id}>
+          <li>FirstName: {speaker.firstName}</li>
+          <li>LastName: {speaker.lastName}</li>
+          <li>Email: {speaker.email}</li>
+          <li>Company: {speaker.companyName}</li>
+          <li>Job Title: {speaker.jobTitle}</li>
+        </ul>
       );
     });
   };
@@ -38,4 +34,11 @@ class App extends React.Component {
   }
 }
 
-export default App;
+// Map state to props
+const mapStateToProps = (state) => {
+  return {
+    getAllSpeakers: Object.values(state.speakers),
+  };
+};
+
+export default connect(mapStateToProps, { getSpeakers })(SpeakerList);
