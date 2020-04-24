@@ -3,7 +3,6 @@ from flask_restful import Resource
 from model.Speaker import Speaker, SpeakerSchema
 from db import db
 
-#
 
 speaker_schema = SpeakerSchema()
 speaker_schemas = SpeakerSchema(many=True)
