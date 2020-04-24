@@ -5,6 +5,7 @@ import { createSpeaker } from "../../actions/speaker";
 
 class CreateSpeaker extends Component {
   onSubmit = (formValues) => {
+    console.log(formValues);
     this.props.createSpeaker(formValues);
   };
   render() {
