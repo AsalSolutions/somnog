@@ -9,7 +9,6 @@ import {
   GET_SPEAKER,
   GET_SPEAKERS,
 } from "./types";
-import Axios from "axios";
 
 // Get all speakers
 export const getSpeakers = () => {
@@ -26,11 +25,18 @@ export const createSpeaker = (formValues) => {
   console.log(formInput);
   return async (dispatch) => {
     try {
-      const response = await axios.post("http://localhost:5000/v1/speaker", {
-        ...formValues,
-      });
+      const options = {
+        "Content-Type": "application/json",
+      };
+      const response = await axios.post(
+        "http://localhost:5000/v1/speaker",
+        {
+          ...formValues,
+        },
+        { headers: options }
+      );
       dispatch({ type: CREATE_SPEAKER, payload: response.data });
-      history.push("/speaker");
+      // history.push("/speaker");
     } catch (e) {
       console.error(`Something went wrong: ${e}`);
     }

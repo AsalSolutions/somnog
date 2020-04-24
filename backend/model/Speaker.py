@@ -27,15 +27,18 @@ class Speaker(db.Model):
         self.photo = photo
         self.socialAccount = socialAccount
 
-    def save(self):
+    @classmethod
+    def save(cls, self):
         db.session.add(self)
         db.session.commit()
 
-    def delete(self):
+    @classmethod
+    def delete(cls, self):
         db.session.delete(self)
         db.session.commit()
 
-    def update(self):
+    @classmethod
+    def update(cls, self):
         db.session.commit()
 
 
