@@ -1,6 +1,6 @@
 from flask import request, jsonify
 from flask_restful import Resource
-from model.Speaker import Speaker, SpeakerSchema
+from model.Speaker import SpeakerModel, SpeakerSchema
 from db import db
 
 #
@@ -10,27 +10,8 @@ speaker_schemas = SpeakerSchema(many=True)
 
 
 class SpeakerApi(Resource):
-    # Get Single Speaker
-    def get(self, id):
-        speaker = Speaker.query.get(id)
-        if speaker:
-            return speaker_schema.jsonify(speaker)
-        return ({"message": "Speaker not found"}), 404
 
-    # Delete Single Speaker
-    def delete(self, id):
-        speaker = Speaker.query.get(id)
-        if speaker:
-            db.session.delete(speaker)
-            db.session.commit()
-            return ({"message": "Speaker deleted sucessfully"}), 200
-        return ({"message": "speaker not found"}), 404
-
-
-class AddSpeaker(Resource):
-    def validate(self):
-        pass
-
+    # Add Speaker
     def post(self):
 
         fistName = request.json['firstName']
@@ -44,15 +25,32 @@ class AddSpeaker(Resource):
         socialAccount = request.json['socialAccount']
 
         # init object from Speaker class
-        newSpeaker = Speaker(fistName, lastName, email, phone,
-                             description, companyName, jobTitle, photo, socialAccount)
+        newSpeaker = SpeakerModel(fistName, lastName, email, phone,
+                                  description, companyName, jobTitle, photo, socialAccount)
         # Save to database
         newSpeaker.save()
         return speaker_schema.jsonify(newSpeaker)
 
+    # Get Single Speaker
+    def get(self, id):
+        speaker = SpeakerModel.query.get(id)
+        if speaker:
+            return speaker_schema.jsonify(speaker)
+        return ({"message": "Speaker not found"}), 404
+
+    # Delete Single Speaker
+    def delete(self, id):
+        speaker = SpeakerModel.query.get(id)
+        if speaker:
+            speaker.delete()
+            # db.session.delete(speaker)
+            # db.session.commit()
+            return ({"message": "Speaker deleted sucessfully"}), 200
+        return ({"message": "speaker not found"}), 404
+
 
 class GetAllSpeakers(Resource):
     def get(self):
-        speakers = Speaker.query.all()
+        speakers = SpeakerModel.query.all()
         result = speaker_schemas.dump(speakers)
         return jsonify(result)

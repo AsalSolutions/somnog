@@ -3,7 +3,7 @@ from db import db, mm
 # `(id,firstname,lastname,photo,description, company,job_title,description,social_acount)`
 
 
-class Speaker(db.Model):
+class SpeakerModel(db.Model):
     _id = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(150), nullable=False)
     lastName = db.Column(db.String(150), nullable=False)
@@ -27,18 +27,15 @@ class Speaker(db.Model):
         self.photo = photo
         self.socialAccount = socialAccount
 
-    @classmethod
-    def save(cls, self):
+    def save(self):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def delete(cls, self):
+    def delete(self):
         db.session.delete(self)
         db.session.commit()
 
-    @classmethod
-    def update(cls, self):
+    def update(self):
         db.session.commit()
 
 
