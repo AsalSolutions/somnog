@@ -39,7 +39,7 @@ class Speaker(db.Model):
         db.session.commit()
 
 
-class SpeakerSchema(mm.Schema):
+class SpeakerModelSchema(mm.Schema):
     class Meta:
         fields = ('_id', 'firstName', 'lastName', 'email', 'phone',
                   'description', 'companyName', 'jobTitle', 'Photo', 'socialAccount')

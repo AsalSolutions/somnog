@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SpeakerForm from "./SpeakerForm";
-import { createSpeaker } from "../../actions/speaker";
+import { createSpeaker } from "../../actions/speakerAction";
 
 class CreateSpeaker extends Component {
   onSubmit = (formValues) => {

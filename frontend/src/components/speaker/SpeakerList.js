@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getSpeakers } from "../../actions/speaker";
+import { getSpeakers } from "../../actions/speakerAction";
 
 class SpeakerList extends React.Component {
   componentDidMount() {

@@ -1,15 +1,16 @@
 from flask import request, jsonify
 from flask_restful import Resource
-from model.Speaker import Speaker, SpeakerSchema
+from model.Speaker import Speaker, SpeakerModelSchema
 from db import db
 
-#
 
-speaker_schema = SpeakerSchema()
-speaker_schemas = SpeakerSchema(many=True)
+speaker_schema = SpeakerModelSchema()
+speaker_schemas = SpeakerModelSchema(many=True)
 
 
 class SpeakerApi(Resource):
+  # This api updates,deletes and gets single speaker information
+
     # Get Single Speaker
     def get(self, id):
         speaker = Speaker.query.get(id)
@@ -21,18 +22,25 @@ class SpeakerApi(Resource):
     def delete(self, id):
         speaker = Speaker.query.get(id)
         if speaker:
-            db.session.delete(speaker)
-            db.session.commit()
+            speaker.delete()
             return ({"message": "Speaker deleted sucessfully"}), 200
         return ({"message": "speaker not found"}), 404
 
 
-class AddSpeaker(Resource):
-    def validate(self):
-        pass
+class GetAllSpeakers(Resource):
+    '''Returns all speakers as a json format '''
 
+    def get(self):
+        speakers = Speaker.query.all()
+        result = speaker_schemas.dump(speakers)
+        return jsonify(result)
+
+
+class AddSpeaker(Resource):
+    # Add Speaker
     def post(self):
 
+        # Get Speaker information
         fistName = request.json['firstName']
         lastName = request.json['lastName']
         email = request.json['email']
@@ -46,13 +54,8 @@ class AddSpeaker(Resource):
         # init object from Speaker class
         newSpeaker = Speaker(fistName, lastName, email, phone,
                              description, companyName, jobTitle, photo, socialAccount)
-        # Save to database
-        newSpeaker.save()
-        return speaker_schema.jsonify(newSpeaker)
-
-
-class GetAllSpeakers(Resource):
-    def get(self):
-        speakers = Speaker.query.all()
-        result = speaker_schemas.dump(speakers)
-        return jsonify(result)
+        if newSpeaker:
+            # Save to database
+            newSpeaker.save()
+            return speaker_schema.jsonify(newSpeaker)
+        return {"message": "could not add speaker to the database"}, 405

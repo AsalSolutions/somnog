@@ -1,5 +1,5 @@
-import axios from "axios";
-// import api from "../api";
+// import axios from "axios";
+import api from "../api";
 import history from "../history";
 
 import {
@@ -9,26 +9,35 @@ import {
   GET_SPEAKER,
   GET_SPEAKERS,
 } from "./types";
-import Axios from "axios";
 
 // Get all speakers
 export const getSpeakers = () => {
   return async (dispatch) => {
-    const response = await axios.get("/v1/speaker");
-    // const response = await fetch("/v1/speaker");
+    const response = await api.get("/speakers");
     dispatch({ type: GET_SPEAKERS, payload: response.data });
   };
 };
 
 // Create Speaker
 export const createSpeaker = (formValues) => {
-  const formInput = { ...formValues };
-  console.log(formInput);
   return async (dispatch) => {
     try {
-      const response = await axios.post("http://localhost:5000/v1/speaker", {
+<<<<<<< HEAD:frontend/src/actions/speakerAction.js
+      const options = {
+        "Content-Type": "application/json",
+      };
+      const response = await axios.post(
+        "http://localhost:5000/v1/speaker",
+        {
+          ...formValues,
+        },
+        { headers: options }
+      );
+=======
+      const response = await api.post("/speakers", {
         ...formValues,
       });
+>>>>>>> frontend:frontend/src/actions/speaker.js
       dispatch({ type: CREATE_SPEAKER, payload: response.data });
       history.push("/speaker");
     } catch (e) {

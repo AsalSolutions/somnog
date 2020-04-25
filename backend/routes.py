@@ -12,10 +12,10 @@ def runApp():
     app.run(debug=True)
 
 
-def speakerApi():
-    api.add_resource(SpeakerApi, '/v1/speaker/<id>')
-    # Add Speaker
-    api.add_resource(AddSpeaker, '/v1/speaker')
-    # Get all speakers
-    api.add_resource(GetAllSpeakers, '/v1/speaker')
-
+def speakersApi():
+    # This api updates,deletes and gets single speaker information
+    api.add_resource(SpeakerApi, '/api/v1/speakers/<id>')
+    # This api Adds new speaker to speakers list
+    api.add_resource(AddSpeaker, '/api/v1/speakers')
+    # This api gets all speakers
+    api.add_resource(GetAllSpeakers, '/api/v1/speakers')
