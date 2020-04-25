@@ -1,4 +1,5 @@
 import mapKeys from "lodash/mapKeys";
+import omit from "lodash/omit";
 import {
   CREATE_SPEAKER,
   DELETE_SPEAKER,
@@ -13,6 +14,8 @@ export const speakerReducer = (state = {}, action) => {
       return { ...state, [action.payload.id]: [action.payload] };
     case GET_SPEAKERS:
       return { ...state, ...mapKeys(action.payload, "_id") };
+    case DELETE_SPEAKER:
+      return omit(state, action.payload);
 
     default:
       return state;
