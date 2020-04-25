@@ -1,4 +1,3 @@
-// import axios from "axios";
 import api from "../api";
 import history from "../history";
 
@@ -22,26 +21,26 @@ export const getSpeakers = () => {
 export const createSpeaker = (formValues) => {
   return async (dispatch) => {
     try {
-<<<<<<< HEAD:frontend/src/actions/speakerAction.js
-      const options = {
-        "Content-Type": "application/json",
-      };
-      const response = await axios.post(
-        "http://localhost:5000/v1/speaker",
-        {
-          ...formValues,
-        },
-        { headers: options }
-      );
-=======
       const response = await api.post("/speakers", {
         ...formValues,
       });
->>>>>>> frontend:frontend/src/actions/speaker.js
       dispatch({ type: CREATE_SPEAKER, payload: response.data });
       history.push("/speaker");
     } catch (e) {
       console.error(`Something went wrong: ${e}`);
+    }
+  };
+};
+
+// Delete Speaker
+export const deleteSpeaker = (id) => {
+  return async (dispatch) => {
+    try {
+      await api.delete(`/speakers/${id}`);
+      dispatch({ type: DELETE_SPEAKER, payload: id });
+      history.push("/speaker");
+    } catch (e) {
+      console.error(`Something Went wrong: ${e}`);
     }
   };
 };
