@@ -3,7 +3,7 @@ from db import db, mm
 # `(id,firstname,lastname,photo,description, company,job_title,description,social_acount)`
 
 
-class SpeakerModel(db.Model):
+class Speaker(db.Model):
     _id = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(150), nullable=False)
     lastName = db.Column(db.String(150), nullable=False)
@@ -39,7 +39,7 @@ class SpeakerModel(db.Model):
         db.session.commit()
 
 
-class SpeakerSchema(mm.Schema):
+class SpeakerModelSchema(mm.Schema):
     class Meta:
         fields = ('_id', 'firstName', 'lastName', 'email', 'phone',
                   'description', 'companyName', 'jobTitle', 'Photo', 'socialAccount')
