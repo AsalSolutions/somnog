@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
-import { Link } from "react-router-dom";
-import { Route } from "react-router-dom";
-import { Layout, Menu } from 'antd';
+import { Link ,Route } from "react-router-dom";
+import { Layout, Menu ,Avatar,Row} from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -31,6 +30,7 @@ class Dashboard extends Component {
       <Layout>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <div className="logo" />
+          <h1 style={{color:'white',paddingTop:"20px",paddingLeft:"20px"}}>SOMNOG APP</h1>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1" icon={<UserOutlined />}>
                 <Link to="/"> Home</Link>
@@ -49,7 +49,11 @@ class Dashboard extends Component {
               className: 'trigger',
               onClick: this.toggle,
             })}
-            @AminAbdisamad
+            <Row>
+                <Avatar size={32} icon={<UserOutlined />} />
+            </Row>
+            
+            
           </Header>
           <Content
             className="site-layout-background"

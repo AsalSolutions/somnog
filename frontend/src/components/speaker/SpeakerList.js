@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Space } from 'antd';
 import { connect } from "react-redux";
 import { getSpeakers } from "../../actions/speakerAction";
+import { Link } from "react-router-dom";
 
 
 const columns = [
@@ -9,7 +10,7 @@ const columns = [
     title: 'First Name',
     dataIndex: 'firstName',
     key: 'firstName',
-    render: text => <a>{text}</a>,
+    render: text => <Link to={`speaker/${text}`} href="#">{text}</Link>,
   },
   {
     title: 'Last Name',
@@ -41,9 +42,10 @@ const columns = [
     title: 'Action',
     key: 'action',
     render: (text, record) => (
+      
       <Space size="middle">
-        <a>Update {record.name}</a>
-        <a>Delete</a>
+        <Link to={`speaker/edit/${record}`}>Update {record.name}</Link>
+        <Link to={`speaker/delete/${text}`}>Delete</Link>
       </Space>
     ),
   },
@@ -79,7 +81,7 @@ class SpeakerList extends React.Component {
   render() {
     return (
       <div>
-        <p>Speakers List</p>
+        <h3>Speakers List</h3>
         <Table columns={columns} dataSource={this.speakerList()} />
         {/* <div>{this.speakerList()}</div> */}
       </div>

@@ -31,9 +31,6 @@ const validateMessages = {
 };
 
 const  SpeakerForm = ({onSubmit}) => {
-//   const onFinish = values => {
-//     console.log(values);
-//   };
   const submitValues = (formValues) => {
     onSubmit(formValues);
     console.log(formValues)

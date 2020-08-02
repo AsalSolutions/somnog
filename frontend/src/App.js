@@ -11,11 +11,6 @@ function App() {
   return (
     <Router history={history}>
       <Dashboard />
-      {/* <div>
-        <Route path="/" exact component={Home} />
-        <Route path="/speaker" exact component={SpeakerList} />
-        <Route path="/speaker/create" exact component={CreateSpeaker} />
-      </div> */}
     </Router>
   );
 }
