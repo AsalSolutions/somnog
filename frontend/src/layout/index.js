@@ -30,10 +30,10 @@ class Dashboard extends Component {
       <Layout>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <div className="logo" />
-          <h1 style={{color:'white',paddingTop:"20px",paddingLeft:"20px"}}>SOMNOG APP</h1>
+          <Link to="/"> <h1 style={{color:'white',paddingTop:"20px",paddingLeft:"20px"}}>SOMNOG APP</h1></Link>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1" icon={<UserOutlined />}>
-                <Link to="/"> Home</Link>
+               Events
             </Menu.Item>
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
                 <Link to="/speaker"> Speakers</Link>
