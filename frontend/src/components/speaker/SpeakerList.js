@@ -1,6 +1,55 @@
 import React from "react";
+import { Table, Space } from 'antd';
 import { connect } from "react-redux";
 import { getSpeakers } from "../../actions/speakerAction";
+
+
+const columns = [
+  {
+    title: 'First Name',
+    dataIndex: 'firstName',
+    key: 'firstName',
+    render: text => <a>{text}</a>,
+  },
+  {
+    title: 'Last Name',
+    dataIndex: 'lastName',
+    key: 'lastName',
+  },
+  {
+    title: 'Email',
+    dataIndex: 'email',
+    key: 'email',
+  },
+  {
+    title: 'Phone',
+    dataIndex: 'phone',
+    key: 'phone',
+  },
+  {
+    title: 'Company',
+    dataIndex: 'companyName',
+    key: 'companyName',
+  },
+  {
+    title: 'Job Title',
+    dataIndex: 'jobTitle',
+    key: 'jobTitle',
+  },
+ 
+  {
+    title: 'Action',
+    key: 'action',
+    render: (text, record) => (
+      <Space size="middle">
+        <a>Update {record.name}</a>
+        <a>Delete</a>
+      </Space>
+    ),
+  },
+];
+
+
 
 class SpeakerList extends React.Component {
   componentDidMount() {
@@ -13,22 +62,26 @@ class SpeakerList extends React.Component {
       return "loading";
     }
     return getAllSpeakers.map((speaker) => {
-      return (
-        <ul key={speaker._id}>
-          <li>FirstName: {speaker.firstName}</li>
-          <li>LastName: {speaker.lastName}</li>
-          <li>Email: {speaker.email}</li>
-          <li>Company: {speaker.companyName}</li>
-          <li>Job Title: {speaker.jobTitle}</li>
-        </ul>
-      );
+      const data = 
+        {
+          key: speaker._id,
+          firstName: speaker.firstName,
+          lastName: speaker.lastName,
+          email:speaker.email,
+          phone:speaker.phone,
+          companyName: speaker.companyName,
+          jobTitle:speaker.jobTitle
+      
+        };
+      return  data 
     });
   };
   render() {
     return (
       <div>
         <p>Speakers List</p>
-        <div>{this.speakerList()}</div>
+        <Table columns={columns} dataSource={this.speakerList()} />
+        {/* <div>{this.speakerList()}</div> */}
       </div>
     );
   }
@@ -42,3 +95,4 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { getSpeakers })(SpeakerList);
+
