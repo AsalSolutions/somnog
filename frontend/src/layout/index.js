@@ -10,7 +10,7 @@ import {
 } from '@ant-design/icons';
 import SpeakerList from "../components/speaker/SpeakerList";
 import CreateSpeaker from "../components/speaker/CreateSpeaker";
-import Home from "../components/pages/Home";
+import Home from "./pages/Home";
 
 const { Header, Sider, Content } = Layout;
 
