@@ -1,0 +1,30 @@
+import React from 'react';
+import { Layout } from 'antd';
+import { Route } from "react-router-dom";
+import SpeakerList from "../components/speaker/SpeakerList";
+import CreateSpeaker from "../components/speaker/CreateSpeaker";
+import Home from "./pages/Home";
+
+
+const { Content } = Layout;
+
+function ContentSection(){
+  return (
+    <Content
+            className="site-layout-background"
+            style={{
+              margin: '24px 16px',
+              padding: 24,
+              minHeight: 610,
+            }}
+    >
+        {/* Content Should be displayed */}
+            <Route path="/" exact component={Home} />
+            <Route path="/speaker" exact component={SpeakerList} />
+            <Route path="/speaker/create" exact component={CreateSpeaker} />
+    </Content>
+  )
+    
+}
+
+export default ContentSection;
