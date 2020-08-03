@@ -9,6 +9,7 @@ import {
   } from '@ant-design/icons';
 
 const {  Sider  } = Layout;
+const { SubMenu} = Menu;
 class Sidebar extends React.Component {
     render(){
         return (
@@ -19,12 +20,14 @@ class Sidebar extends React.Component {
             <Menu.Item key="1" icon={<UserOutlined />}>
                 Events
             </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                <Link to="/speaker"> Speakers</Link>
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-                <Link to="/speaker/create"> Add Speaker</Link>
-            </Menu.Item>
+            <SubMenu key="sub1" icon={<UserOutlined />} title="Speaker">
+                <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+                    <Link to="/speaker"> Speakers</Link>
+                </Menu.Item>
+                <Menu.Item key="3" icon={<UploadOutlined />}>
+                    <Link to="/speaker/create"> Add Speaker</Link>
+                </Menu.Item>
+            </SubMenu>
             </Menu>
         </Sider>
         );

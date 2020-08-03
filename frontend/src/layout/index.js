@@ -1,10 +1,12 @@
 import React,{Component} from 'react';
 
-import { Layout ,Avatar,Row} from 'antd';
+import { Layout ,Avatar,Menu} from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  UserOutlined
+  UserOutlined,
+  NotificationOutlined,
+  MessageOutlined
 } from '@ant-design/icons';
 
 import Sidebar from './Sidebar';
@@ -29,14 +31,18 @@ class Dashboard extends Component {
         {/* Sidebar */}
         <Sidebar collapsed={this.state.collapsed} />
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ paddingLeft: 20 }}>
+          <Header className="site-layout-background" >
             {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
               className: 'trigger',
               onClick: this.toggle,
             })}
-            <Row>
-                <Avatar size={32} icon={<UserOutlined />} />
-            </Row>
+            <span style={{  float:'right', display:'flex',
+                     justifyContent:"space-around",
+                     alignItems:'center', width:"180px", paddingTop:"5px" }} >
+                        <p> Account</p>
+                        
+                        <p><Avatar icon={<UserOutlined />} /> Hassan</p>
+          </span>
           </Header>
           <ContentSection/>
         </Layout>
