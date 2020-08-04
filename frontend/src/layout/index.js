@@ -1,12 +1,11 @@
 import React,{Component} from 'react';
 
-import { Layout ,Avatar,Menu} from 'antd';
+import { Layout ,Avatar} from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   UserOutlined,
-  NotificationOutlined,
-  MessageOutlined
+
 } from '@ant-design/icons';
 
 import Sidebar from './Sidebar';

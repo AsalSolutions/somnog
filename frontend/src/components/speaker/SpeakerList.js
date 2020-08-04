@@ -72,9 +72,11 @@ class SpeakerList extends React.Component {
           email:speaker.email,
           phone:speaker.phone,
           companyName: speaker.companyName,
-          jobTitle:speaker.jobTitle
+          jobTitle:speaker.jobTitle,
+
       
         };
+        
       return  data 
     });
   };
@@ -82,7 +84,7 @@ class SpeakerList extends React.Component {
     return (
       <div>
         <h3>Speakers List</h3>
-        <Table columns={columns} dataSource={this.speakerList()} />
+        <Table columns={columns} dataSource={this.speakerList()}  />
         {/* <div>{this.speakerList()}</div> */}
       </div>
     );
