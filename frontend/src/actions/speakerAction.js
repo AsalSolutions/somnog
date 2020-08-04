@@ -44,3 +44,17 @@ export const deleteSpeaker = (id) => {
     }
   };
 };
+
+// Update speaker
+export const updateSpeaker = (id, formValues) => async dispatch => {
+  const response = await api.put(`/speakers/${id}`, formValues);
+  dispatch({ type: UPDATE_SPEAKER, payload: response.data });
+  history.push("/speaker");
+};
+
+// Get a single speaker
+// Get a sigle stream
+export const getSpeaker = id => async dispatch => {
+  const response = await api.get(`/speakers/${id}`);
+  dispatch({ type: GET_SPEAKER, payload: response.data });
+};

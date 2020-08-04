@@ -30,14 +30,14 @@ const validateMessages = {
   },
 };
 
-const  SpeakerForm = ({onSubmit}) => {
+const  SpeakerForm = ({onSubmit,initialValues}) => {
   const submitValues = (formValues) => {
     onSubmit(formValues);
     console.log(formValues)
   };
 
   return (
-    <Form {...layout} name="nest-messages" onFinish={submitValues} validateMessages={validateMessages}>
+    <Form {...layout} name="nest-messages" onFinish={submitValues} validateMessages={validateMessages} initialValues={initialValues}>
       <Form.Item
         name={'firstName'}
         label="First Name"

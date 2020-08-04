@@ -3,6 +3,7 @@ import { Layout } from 'antd';
 import { Route } from "react-router-dom";
 import SpeakerList from "../components/speaker/SpeakerList";
 import CreateSpeaker from "../components/speaker/CreateSpeaker";
+import UpdateSpeaker from "../components/speaker/UpdateSpeaker"
 import Home from "./pages/Home";
 
 
@@ -22,6 +23,7 @@ function ContentSection(){
             <Route path="/" exact component={Home} />
             <Route path="/speaker" exact component={SpeakerList} />
             <Route path="/speaker/create" exact component={CreateSpeaker} />
+            <Route path="/speaker/edit/:id" exact component={UpdateSpeaker} />
     </Content>
   )
     

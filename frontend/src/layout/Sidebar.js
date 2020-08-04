@@ -27,6 +27,7 @@ class Sidebar extends React.Component {
                 <Menu.Item key="3" icon={<UploadOutlined />}>
                     <Link to="/speaker/create"> Add Speaker</Link>
                 </Menu.Item>
+                
             </SubMenu>
             </Menu>
         </Sider>

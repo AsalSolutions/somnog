@@ -14,8 +14,12 @@ export const speakerReducer = (state = {}, action) => {
       return { ...state, [action.payload.id]: [action.payload] };
     case GET_SPEAKERS:
       return { ...state, ...mapKeys(action.payload, "_id") };
+    case GET_SPEAKER:
+      return { ...state, [action.payload.id]: action.payload };
     case DELETE_SPEAKER:
       return omit(state, action.payload);
+    case UPDATE_SPEAKER:
+      return { ...state, [action.payload.id]: action.payload };
 
     default:
       return state;

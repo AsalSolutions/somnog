@@ -44,8 +44,8 @@ const columns = [
     render: (text, record) => (
       
       <Space size="middle">
-        <Link to={`speaker/edit/${record}`}>Update {record.name}</Link>
-        <Link to={`speaker/delete/${text}`}>Delete</Link>
+        <Link to={`speaker/edit/${record.key}`}>Update {record.name}</Link>
+        <Link to={`speaker/delete/${text.firstName}`}>Delete</Link>
       </Space>
     ),
   },
