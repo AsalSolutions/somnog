@@ -16,6 +16,7 @@ dbPassword = os.getenv("DB_PASSWORD")
 app = Flask(__name__)
 
 # DB Configuration
+# SQLALCHEMY_DATABASE_URI = f"mysql+mysqlconnector://{dbUser}:{dbPassword}@localhost/{dbName}"
 app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql://{dbUser}:{dbPassword}@localhost/{dbName}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)

@@ -25,6 +25,37 @@ class SpeakerApi(Resource):
             speaker.delete()
             return ({"message": "Speaker deleted sucessfully"}), 200
         return ({"message": "speaker not found"}), 404
+    
+    def put(self, id):
+        updateSpeaker = Speaker.query.get(id)
+        # updateSpeaker = request.form['data']
+        print(updateSpeaker)
+
+        # Get information from user
+        fisrtName = request.json['firstName']
+        lastName = request.json['lastName']
+        email = request.json['email']
+        phone = request.json['phone']
+        description = request.json['description']
+        companyName = request.json['companyName']
+        jobTitle = request.json['jobTitle']
+        photo = request.json['photo']
+        socialAccount = request.json['socialAccount']
+        
+
+        if updateSpeaker:
+            updateSpeaker.fisrtName = fisrtName
+            updateSpeaker.lastName = lastName
+            updateSpeaker.email = email
+            updateSpeaker.phone = phone
+            updateSpeaker.companyName = companyName
+            updateSpeaker.jobTitle = jobTitle
+            updateSpeaker.photo = photo
+            updateSpeaker.socialAccount = socialAccount
+           
+            Speaker.update(updateSpeaker)
+            return speaker_schema.jsonify(updateSpeaker)
+        return {"message": "Sorry! could NOT update speaker"}, 405
 
 
 class GetAllSpeakers(Resource):
