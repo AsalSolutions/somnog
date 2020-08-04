@@ -26,7 +26,3 @@ users.update(userAge)
 listUsers = [124, 'Hassan', 'Hassan''district', False, 3, 50]
 
 print(listUsers.append("Newd"))
-<<<<<<< HEAD
-
-=======
->>>>>>> frontend

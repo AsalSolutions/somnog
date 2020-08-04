@@ -32,7 +32,7 @@ class SpeakerApi(Resource):
         print(updateSpeaker)
 
         # Get information from user
-        fisrtName = request.json['firstName']
+        firstName = request.json['firstName']
         lastName = request.json['lastName']
         email = request.json['email']
         phone = request.json['phone']
@@ -41,15 +41,17 @@ class SpeakerApi(Resource):
         jobTitle = request.json['jobTitle']
         photo = request.json['photo']
         socialAccount = request.json['socialAccount']
+        print(firstName,lastName,email,phone,description,companyName,jobTitle,photo,socialAccount)
         
 
         if updateSpeaker:
-            updateSpeaker.fisrtName = fisrtName
+            updateSpeaker.firstName = firstName
             updateSpeaker.lastName = lastName
             updateSpeaker.email = email
             updateSpeaker.phone = phone
             updateSpeaker.companyName = companyName
             updateSpeaker.jobTitle = jobTitle
+            updateSpeaker.description = description
             updateSpeaker.photo = photo
             updateSpeaker.socialAccount = socialAccount
            
@@ -72,7 +74,7 @@ class AddSpeaker(Resource):
     def post(self):
 
         # Get Speaker information
-        fistName = request.json['firstName']
+        firstName = request.json['firstName']
         lastName = request.json['lastName']
         email = request.json['email']
         phone = request.json['phone']
@@ -83,7 +85,7 @@ class AddSpeaker(Resource):
         socialAccount = request.json['socialAccount']
 
         # init object from Speaker class
-        newSpeaker = Speaker(fistName, lastName, email, phone,
+        newSpeaker = Speaker(firstName, lastName, email, phone,
                              description, companyName, jobTitle, photo, socialAccount)
         if newSpeaker:
             # Save to database
