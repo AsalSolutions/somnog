@@ -2,10 +2,9 @@ import React from 'react';
 import { Link  } from "react-router-dom";
 import { Layout, Menu } from 'antd';
 import {
-  
+    
     UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
+    UserAddOutlined,
   } from '@ant-design/icons';
 
 const {  Sider  } = Layout;
@@ -21,10 +20,10 @@ class Sidebar extends React.Component {
                 Events
             </Menu.Item>
             <SubMenu key="sub1" icon={<UserOutlined />} title="Speaker">
-                <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+                <Menu.Item key="2" icon={<UserOutlined />}>
                     <Link to="/speaker"> Speakers</Link>
                 </Menu.Item>
-                <Menu.Item key="3" icon={<UploadOutlined />}>
+                <Menu.Item key="3" icon={<UserAddOutlined />}>
                     <Link to="/speaker/create"> Add Speaker</Link>
                 </Menu.Item>
                 

@@ -41,11 +41,11 @@ const columns = [
   {
     title: 'Action',
     key: 'action',
-    render: (text, record) => (
+    render: record => (
       
       <Space size="middle">
         <Link to={`speaker/edit/${record.key}`}>Update {record.name}</Link>
-        <Link to={`speaker/delete/${text.firstName}`}>Delete</Link>
+        <Link to={`speaker/delete/${record.key}`}>Delete</Link>
       </Space>
     ),
   },
