@@ -6,11 +6,12 @@ import { Link } from "react-router-dom";
 
 
 const columns = [
+
   {
     title: 'First Name',
     dataIndex: 'firstName',
     key: 'firstName',
-    render: text => <Link to={`speaker/${text}`} href="#">{text}</Link>,
+    render: text => <Link to={`speaker/${text}`}>{text}</Link>,
   },
   {
     title: 'Last Name',
@@ -44,7 +45,8 @@ const columns = [
     render: record => (
       
       <Space size="middle">
-        <Link to={`speaker/edit/${record.key}`}>Update {record.name}</Link>
+        <Link to={`speaker/view/${record.key}`}>View</Link>
+        <Link to={`speaker/edit/${record.key}`}>Update </Link>
         <Link to={`speaker/delete/${record.key}`}>Delete</Link>
       </Space>
     ),
