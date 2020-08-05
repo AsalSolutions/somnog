@@ -29,7 +29,7 @@ class SpeakerApi(Resource):
     def put(self, id):
         updateSpeaker = Speaker.query.get(id)
         # updateSpeaker = request.form['data']
-        print(updateSpeaker)
+       
 
         # Get information from user
         firstName = request.json['firstName']
@@ -60,6 +60,12 @@ class SpeakerApi(Resource):
         return {"message": "Sorry! could NOT update speaker"}, 405
 
 
+# Get Total Number of Speakers
+class TotalSpeakers(Resource):
+    def get(self):
+        count = Speaker.query.count()
+        return {"speakerCount":count}
+
 class GetAllSpeakers(Resource):
     '''Returns all speakers as a json format '''
 
@@ -67,6 +73,7 @@ class GetAllSpeakers(Resource):
         speakers = Speaker.query.all()
         result = speaker_schemas.dump(speakers)
         return jsonify(result)
+
 
 
 class AddSpeaker(Resource):

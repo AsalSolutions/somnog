@@ -1,6 +1,6 @@
 from flask_restful import Api
 from db import app
-from resources.speaker import SpeakerApi, AddSpeaker, GetAllSpeakers
+from resources.speaker import SpeakerApi, AddSpeaker, GetAllSpeakers,TotalSpeakers
 
 # Init API
 api = Api(app)
@@ -19,3 +19,5 @@ def speakersApi():
     api.add_resource(AddSpeaker, '/api/v1/speakers')
     # This api gets all speakers
     api.add_resource(GetAllSpeakers, '/api/v1/speakers')
+    # Get Total Speaker Count
+    api.add_resource(TotalSpeakers,'/api/v1/speakers/count')
