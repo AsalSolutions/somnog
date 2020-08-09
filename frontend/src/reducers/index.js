@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import { reducer as formReducer } from "redux-form";
 import { speakerReducer } from "./speakerReducer";
+import {languageReducer} from './languageReducer'
 export default combineReducers({
-  form: formReducer,
+  language: languageReducer,
   speakers: speakerReducer,
 });

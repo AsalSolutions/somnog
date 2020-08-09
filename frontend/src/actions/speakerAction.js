@@ -8,6 +8,7 @@ import {
   UPDATE_SPEAKER,
   GET_SPEAKER,
   GET_SPEAKERS,
+  
 } from "./types";
 
 
@@ -28,6 +29,14 @@ export const getSpeakers = () => {
   };
 };
 
+// Speaker Count
+// export const speakerCount = () => {
+//   return async(dispatch) => {
+//     const response = await api.get('/speakers/count')
+//     dispatch({type:SPEAKER_COUNT, payload:response.data})
+//   }
+// }
+
 
 // Create Speaker
 export const createSpeaker = (formValues) => {
@@ -40,8 +49,8 @@ export const createSpeaker = (formValues) => {
       sucessAlert("Speaker Added Successfully")
       history.push("/speaker");
     } catch (e) {
-      errorAlert("Something Went Wrong :(")
-      console.error(`Something went wrong: ${e}`);
+      errorAlert(`Something Went Wrong ${e} :(`)
+      // console.error(`Something went wrong: ${e}`);
     }
   };
 };
@@ -63,10 +72,15 @@ export const deleteSpeaker = (id) => {
 
 // Update speaker
 export const updateSpeaker = (id, formValues) => async dispatch => {
-  const response = await api.put(`/speakers/${id}`, formValues);
-  dispatch({ type: UPDATE_SPEAKER, payload: response.data });
-  sucessAlert("Speaker updated Successfully")
-  history.push("/speaker");
+  try{
+    const response = await api.put(`/speakers/${id}`, formValues);
+    dispatch({ type: UPDATE_SPEAKER, payload: response.data });
+    sucessAlert("Speaker updated Successfully")
+    history.push("/speaker");
+  }catch(e){
+    errorAlert(`Request failed with ${e.message} error`)
+  }
+ 
 };
 
 // Get a single speaker

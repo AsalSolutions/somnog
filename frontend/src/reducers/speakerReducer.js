@@ -6,6 +6,7 @@ import {
   UPDATE_SPEAKER,
   GET_SPEAKER,
   GET_SPEAKERS,
+  
 } from "../actions/types";
 
 export const speakerReducer = (state = {}, action) => {
@@ -20,6 +21,8 @@ export const speakerReducer = (state = {}, action) => {
       return omit(state, action.payload);
     case UPDATE_SPEAKER:
       return { ...state, [action.payload.id]: action.payload };
+    // case SPEAKER_COUNT:
+    //   return {...state, [action.payload.speakerCount]:action.payload}
 
     default:
       return state;

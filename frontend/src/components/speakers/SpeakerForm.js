@@ -1,4 +1,5 @@
 import React from "react"; 
+import {connect} from 'react-redux';
 import { Form, Input, Button } from 'antd';
 
 const layout = {
@@ -19,28 +20,43 @@ const layout = {
 // Description
 // Photo Url
 // Social Account
-const validateMessages = {
-  required: '${label} is required!',
-  types: {
-    email: '${label} is not valid email!',
-    number: '${label} is not a valid number!',
-  },
-  phone: {
-    range: '${label} must be between ${min} and ${max}',
-  },
-};
 
-const  SpeakerForm = ({onSubmit,initialValues}) => {
+
+const  SpeakerForm = ({onSubmit,initialValues,app}) => {
+
+  const validateMessages = {
+    required: app.language === 'English' ?  '${label} is required!' : '${label} Waa loo baahanyahay!',
+    types: {
+      email: '${label} is not valid email!',
+      number: '${label} is not a valid number!',
+    },
+    phone: {
+      range: '${label} must be between ${min} and ${max}',
+    },
+  };
+
   const submitValues = (formValues) => {
     onSubmit(formValues);
     console.log(formValues)
+    
   };
+  
+  // Form Fields Translation
+  const firstName  = app.language === 'EN' ? "First Name" : "Magaca Koobaad";
+  const lastName = app.language === "EN" ? "Last Name" : "Magaca Labaad";
+  const companyName  = app.language === 'EN' ? "Company Name" : "Magaca Shirkadda";
+  const jobTitle  = app.language === 'EN' ? "Job Title" : "Xilka Shaqo";
+  const photo = app.language === "EN" ? "Photo " : "Gali Sawir";
+  const description  = app.language === 'EN' ? "Description" : "Faah Faahin";
+  const submit = app.language === 'EN' ? "Submit" : "Dir";
+ 
 
   return (
+   
     <Form {...layout} name="nest-messages" onFinish={submitValues} validateMessages={validateMessages} initialValues={initialValues}>
       <Form.Item
         name={'firstName'}
-        label="First Name"
+        label={firstName}
         rules={[
           {
             required: true,
@@ -51,7 +67,7 @@ const  SpeakerForm = ({onSubmit,initialValues}) => {
       </Form.Item>
       <Form.Item
         name={'lastName'}
-        label="Last Name"
+        label={lastName}
         rules={[
           {
             required: true,
@@ -80,7 +96,7 @@ const  SpeakerForm = ({onSubmit,initialValues}) => {
       </Form.Item>
       <Form.Item
         name={'companyName'}
-        label="Company"
+        label={companyName}
         rules={[
           {
             required: true,
@@ -91,7 +107,7 @@ const  SpeakerForm = ({onSubmit,initialValues}) => {
       </Form.Item>
       <Form.Item
         name={'jobTitle'}
-        label="Title"
+        label={jobTitle}
         rules={[
           {
             required: true,
@@ -101,10 +117,10 @@ const  SpeakerForm = ({onSubmit,initialValues}) => {
         <Input />
       </Form.Item>
       
-      <Form.Item name={'description'} label="Description">
+      <Form.Item name={'description'} label={description}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={'photo'} label="Photo URL">
+      <Form.Item name={'photo'} label={photo}>
         <Input />
       </Form.Item>
       <Form.Item name={'socialAccount'} label="Website">
@@ -112,13 +128,18 @@ const  SpeakerForm = ({onSubmit,initialValues}) => {
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">
-          Submit
+          {submit}
         </Button>
       </Form.Item>
     </Form>
   );
 };
 
+const mapStateToProps = state => {
+  return { app: state.language };
+};
 
-export default SpeakerForm;
+
+
+export default connect(mapStateToProps)(SpeakerForm);
   

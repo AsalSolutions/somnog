@@ -1,6 +1,7 @@
 import React from "react";
 
 
+
 import { Card, Avatar, Space } from 'antd';
 import {EnvironmentFilled, CoffeeOutlined,UserOutlined,FileAddFilled } from '@ant-design/icons';
 
@@ -18,7 +19,9 @@ export default function Home() {
   >
     <Meta
       avatar={<Avatar style={{ backgroundColor: '#0f4c75' }} size={64} icon={<UserOutlined/>}/>}
+      // title="Speakers"
       title="Speakers"
+      
       description="This will be speaker description"
     />
   </Card>
@@ -52,5 +55,9 @@ export default function Home() {
   </Space>);
 }
 
+
+// const mapStateToProps  = ( state) =>{
+//   speakers
+// }
 
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { Route } from "react-router-dom";
-import SpeakerList from "../components/speaker/SpeakerList";
-import CreateSpeaker from "../components/speaker/CreateSpeaker";
-import UpdateSpeaker from "../components/speaker/UpdateSpeaker";
-import DeleteSpeaker from "../components/speaker/DeleteSpeaker";
+import SpeakerList from "../components/speakers/SpeakerList";
+import CreateSpeaker from "../components/speakers/CreateSpeaker";
+import UpdateSpeaker from "../components/speakers/UpdateSpeaker";
+import DeleteSpeaker from "../components/speakers/DeleteSpeaker";
 import Home from "./pages/Home";
 
 

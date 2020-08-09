@@ -58,10 +58,13 @@ const columns = [
 class SpeakerList extends React.Component {
   componentDidMount() {
     this.props.getSpeakers();
+   
   }
 
   speakerList = () => {
+    
     const { getAllSpeakers } = this.props;
+    console.log(this.props.getAllSpeakers.length)
     if (!getAllSpeakers) {
       return "loading";
     }
@@ -87,7 +90,6 @@ class SpeakerList extends React.Component {
       <div>
         <h3>Speakers List</h3>
         <Table columns={columns} dataSource={this.speakerList()}  />
-        {/* <div>{this.speakerList()}</div> */}
       </div>
     );
   }
@@ -96,7 +98,7 @@ class SpeakerList extends React.Component {
 // Map state to props
 const mapStateToProps = (state) => {
   return {
-    getAllSpeakers: Object.values(state.speakers),
+    getAllSpeakers: Object.values(state.speakers)
   };
 };
 
