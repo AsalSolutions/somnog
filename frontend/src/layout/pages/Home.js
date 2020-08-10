@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from 'react-redux';
 
 
 
@@ -7,7 +8,15 @@ import {EnvironmentFilled, CoffeeOutlined,UserOutlined,FileAddFilled } from '@an
 
 const { Meta } = Card;
 
-export default function Home() {
+function Home({app}) {
+  // Translate 
+  const speakers = app.language === "EN" ? "Speakers" : "Khudbo-jeediye"
+  const speakerCardDescription = app.language === "EN" ? "This will be speaker description" : "Halkan ayaad ka ogaan kartaa dhamaan macluumaadka ku saabsan khudbo-jeediyaasha";
+  const events = app.language === "EN" ? "Events" : "Dhacdooyinka"
+  const eventsCardDescription = app.language === "EN" ? "This will be events description" : "Halkan ayaad ka ogaan kartaa dhamaan macluumaadka ku saabsan Dhacdooyinka";
+  const conference = app.language === "EN" ? "Conference" : "Shirarka"
+  const conferenceCardDescription = app.language === "EN" ? "This will be conference description" : "Halkan ayaad ka ogaan kartaa dhamaan macluumaadka ku saabsan shirka";
+  
   return(
   <Space size='large'>
     <Card hoverable
@@ -20,9 +29,9 @@ export default function Home() {
     <Meta
       avatar={<Avatar style={{ backgroundColor: '#0f4c75' }} size={64} icon={<UserOutlined/>}/>}
       // title="Speakers"
-      title="Speakers"
+      title={speakers}
       
-      description="This will be speaker description"
+      description={speakerCardDescription}
     />
   </Card>
     <Card hoverable
@@ -34,8 +43,8 @@ export default function Home() {
     >
     <Meta
       avatar={<Avatar style={{ backgroundColor: '#87d068' }} size={64} icon={<EnvironmentFilled/>}/>}
-      title="Events"
-      description="This will be event description"
+      title={events}
+      description={eventsCardDescription}
     />
   </Card>
   <Card hoverable
@@ -47,17 +56,19 @@ export default function Home() {
   >
     <Meta
       avatar={<Avatar style={{ backgroundColor: '#b52b65' }} size={64} icon={<CoffeeOutlined/>}/>}
-      title="Conference"
-      description="This will be Conference description"
+      title={conference}
+      description={conferenceCardDescription}
     />
   </Card>
 
   </Space>);
 }
 
+const mapStateToProps = (state) => {
+  return {app:state.language}
+}
 
-// const mapStateToProps  = ( state) =>{
-//   speakers
-// }
+export default connect(mapStateToProps)(Home);
+
 
 

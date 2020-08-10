@@ -29,21 +29,6 @@ const { SubMenu } = Menu;
 
 
 
-//  export const createSpeaker = (formValues) => {
-//     return async (dispatch) => {
-//       try {
-//         const response = await api.post("/speakers", {
-//           ...formValues,
-//         });
-//         dispatch({ type: CREATE_SPEAKER, payload: response.data });
-//         sucessAlert("Speaker Added Successfully")
-//         history.push("/speaker");
-//       } catch (e) {
-//         errorAlert(`Something Went Wrong ${e} :(`)
-//         // console.error(`Something went wrong: ${e}`);
-//       }
-//     };
-//   };
 
 //  Languages
  const mapStateToProps = state => {

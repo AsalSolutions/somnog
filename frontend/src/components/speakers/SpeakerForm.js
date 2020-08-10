@@ -43,7 +43,7 @@ const  SpeakerForm = ({onSubmit,initialValues,app}) => {
   
   // Form Fields Translation
   const firstName  = app.language === 'EN' ? "First Name" : "Magaca Koobaad";
-  const lastName = app.language === "EN" ? "Last Name" : "Magaca Labaad";
+  const lastName = localStorage.getItem("language") === "EN" ? "Last Name" : "Magaca Labaad";
   const companyName  = app.language === 'EN' ? "Company Name" : "Magaca Shirkadda";
   const jobTitle  = app.language === 'EN' ? "Job Title" : "Xilka Shaqo";
   const photo = app.language === "EN" ? "Photo " : "Gali Sawir";

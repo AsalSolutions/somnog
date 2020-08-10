@@ -8,14 +8,21 @@ class CreateSpeaker extends Component {
     // this.props.createSpeaker(formValues);
      this.props.createSpeaker(formValues);
   };
+  
   render() {
+    // const text = localStorage.getItem("language") === 'EN' ? 'Add Speaker' : 'Ku dar Soo Jeediye';
+    const text = this.props.app.language === 'EN' ? 'Add Speaker' : 'Diiwaan Gali Speaker'
     return (
       <div>
-        <h3>Add Speaker</h3>
+        <h2>{text}</h2>
         <SpeakerForm onSubmit={this.onSubmit}/>
       </div>
     );
   }
 }
 
-export default connect(null, { createSpeaker })(CreateSpeaker);
+const mapStateToProps = state => {
+  return { app: state.language };
+};
+
+export default connect(mapStateToProps, { createSpeaker })(CreateSpeaker);
