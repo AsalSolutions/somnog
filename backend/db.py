@@ -3,6 +3,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from dotenv import load_dotenv
+from flask_migrate import Migrate
 
 
 load_dotenv()
@@ -21,3 +22,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql://{dbUser}:{dbPassword}@localhos
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 mm = Marshmallow(app)
+
+# Configure Flask Migrate 
+migrate = Migrate(app,db)

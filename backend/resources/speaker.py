@@ -86,8 +86,8 @@ class SpeakerListAPI(Resource):
         socialAccount = request.json['socialAccount']
 
         # init object from Speaker class
-        newSpeaker = Speaker(firstName, lastName, email, phone,
-                             description, companyName, jobTitle, photo, socialAccount)
+        newSpeaker = Speaker(firstName=firstName, lastName=lastName, email=email, phone=phone,
+                             description=description, companyName=companyName, jobTitle=jobTitle, photo=photo, socialAccount=socialAccount)
         if newSpeaker:
             # Save to database
             newSpeaker.save()

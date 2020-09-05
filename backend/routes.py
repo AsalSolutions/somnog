@@ -1,7 +1,7 @@
 from flask_restful import Api
 from db import app
 from resources.speaker import SpeakerAPI, SpeakerListAPI,TotalSpeakers
-from resources.workshop import WorkshopAPI
+from resources.workshop import WorkshopAPI,WorkshopListAPI
 
 
 # Init API
@@ -24,6 +24,6 @@ def speakersAPI():
 
 
 def workshopsAPI():
-    api.add_resource(WorkshopAPI,"/api/v1.0/workshops/<id>")
-
+    api.add_resource(WorkshopAPI,"/api/v1.0/workshops/<id>", endpoint="workshop")
+    api.add_resource(WorkshopListAPI,"/api/v1.0/workshops", endpoint="workshops")
 

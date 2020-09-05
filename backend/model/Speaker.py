@@ -12,22 +12,13 @@ class Speaker(db.Model):
     description = db.Column(db.String(255), nullable=True)
     companyName = db.Column(db.String(140), nullable=True)
     jobTitle = db.Column(db.String(120), nullable=True)
-    photo = db.Column(db.String(100), nullable=True)
+    speaker_photo = db.Column(db.String(100), nullable=True,default="default.png")
     socialAccount = db.Column(db.String(200), nullable=True)
     workshop = db.relationship('Workshop',
         backref=db.backref('workshop', lazy=True))
 
-    def __init__(self, firstName, lastName, email,
-                 phone, description, companyName, jobTitle, photo, socialAccount):
-        self.firstName = firstName
-        self.lastName = lastName
-        self.email = email
-        self.phone = phone
-        self.description = description
-        self.companyName = companyName
-        self.jobTitle = jobTitle
-        self.photo = photo
-        self.socialAccount = socialAccount
+    def __repr__(self):
+        return f"Speaker {self.firstName} {self.lastName}" 
 
     def save(self):
         db.session.add(self)

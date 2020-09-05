@@ -9,36 +9,53 @@ workshopSchemas = WorkshopModelSchema(many=True)
 
 
 class WorkshopAPI(Resource):
+    # Get a Single Workshop
     def get(self,id):
         workshop = Workshop.query.get(id)
         if workshop:
             return workshopSchema.jsonify(workshop)
         return ({"message":"Workshop not found"}),404
     
-    
-class AddWorkshop(Resource):
-    # Add Speaker
-    def post(self):
+    # Delete a workshop by id
+    def delete(self,id):
+        workshop = Workshop.query.get(id)
+        if workshop:
+            workshop.delete()
+            return ({"message":"workshop deleted successfully"}),200
+        return ({"message":"Workshop not found"}),404
 
-        # Get Speaker information
+    def patch(self,id):
+        workshop = Workshop.query.get_or_404(id)
+        # if 'workshopTitle' in request.json['workshopTitle']:
+        #     workshop.workshopTitle = request.json['workshopTitle']
+
+    
+class WorkshopListAPI(Resource):
+
+    # List all workshops
+    def get(self):
+        workshops = Workshop.query.all()
+        result = workshopSchemas.dump(workshops)
+        return jsonify(result)
+
+    # Add New Workshops
+    def post(self):
+        # Get Workshop Information
         workshopTitle = request.json['workshopTitle']
-        lastName = request.json['lastName']
-        email = request.json['email']
-        phone = request.json['phone']
         description = request.json['description']
-        companyName = request.json['companyName']
-        jobTitle = request.json['jobTitle']
-        photo = request.json['photo']
-        socialAccount = request.json['socialAccount']
+        # startDate = request.json['startDate']
+        # endDate = request.json['endDate']
+        location = request.json['location']
+        course_image = request.json['course_image']
+        lecturer_id = request.json['lecturer_id']
 
         # init object from Speaker class
-        newSpeaker = Speaker(firstName, lastName, email, phone,
-                             description, companyName, jobTitle, photo, socialAccount)
-        if newSpeaker:
+        newWorkshop = Workshop(workshopTitle=workshopTitle,description=description,location=location,course_image=course_image,lecturer_id=lecturer_id)
+        if newWorkshop:
             # Save to database
-            newSpeaker.save()
-            return speaker_schema.jsonify(newSpeaker)
-        return {"message": "could not add speaker to the database"}, 405
+            newWorkshop.save()
+            return workshopSchema.jsonify(newWorkshop)
+        return {"message": "could not add workshop to the database"}, 405
 
 
 

@@ -1,11 +1,12 @@
+from datetime import datetime
 from db import db, mm
 
 class Workshop(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     workshopTitle = db.Column(db.String(150), nullable=False)
     description = db.Column(db.Text)
-    startDate = db.Column(db.DateTime, nullable=True)
-    endDate = db.Column(db.DateTime, nullable=True)
+    startDate = db.Column(db.DateTime, nullable=True,default=datetime.utcnow())
+    endDate = db.Column(db.DateTime, nullable=True,default=datetime.utcnow())
     course_image = db.Column(db.String(20), nullable=False,
                      default="default.png")
     location = db.Column(db.String(80))
