@@ -14,6 +14,8 @@ class Speaker(db.Model):
     jobTitle = db.Column(db.String(120), nullable=True)
     photo = db.Column(db.String(100), nullable=True)
     socialAccount = db.Column(db.String(200), nullable=True)
+    workshop = db.relationship('Workshop',
+        backref=db.backref('workshop', lazy=True))
 
     def __init__(self, firstName, lastName, email,
                  phone, description, companyName, jobTitle, photo, socialAccount):
@@ -46,7 +48,7 @@ class SpeakerModelSchema(mm.Schema):
 
 
 # Create DB
-db.create_all()
+# db.create_all()
 # # Insert Spearker
 # speaker_1 = Speaker(firstName="Hassan", lastName="Abdisamad",
 #                     email="hassan@example.com", jobTitle="Machine Developer")

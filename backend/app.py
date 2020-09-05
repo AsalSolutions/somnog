@@ -1,5 +1,5 @@
 from flask_cors import CORS, cross_origin
-from routes import speakersApi, runApp
+from routes import speakersAPI, runApp, workshopsAPI
 from db import app
 
 # This should be removed on production
@@ -12,8 +12,11 @@ def index():
     return {"name": "Somnog App", "description": text}
 
 
+# Get routes  Api 
 # Speaker Api
-speakersApi()
+speakersAPI()
+workshopsAPI()
+
 
 # Main
 if __name__ == '__main__':

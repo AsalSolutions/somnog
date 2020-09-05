@@ -8,7 +8,7 @@ speaker_schema = SpeakerModelSchema()
 speaker_schemas = SpeakerModelSchema(many=True)
 
 
-class SpeakerApi(Resource):
+class SpeakerAPI(Resource):
   # This api updates,deletes and gets single speaker information
 
     # Get Single Speaker
@@ -29,8 +29,7 @@ class SpeakerApi(Resource):
     def put(self, id):
         updateSpeaker = Speaker.query.get(id)
         # updateSpeaker = request.form['data']
-       
-
+    
         # Get information from user
         firstName = request.json['firstName']
         lastName = request.json['lastName']
@@ -66,20 +65,15 @@ class TotalSpeakers(Resource):
         count = Speaker.query.count()
         return {"speakerCount":count}
 
-class GetAllSpeakers(Resource):
+class SpeakerListAPI(Resource):
     '''Returns all speakers as a json format '''
 
     def get(self):
         speakers = Speaker.query.all()
         result = speaker_schemas.dump(speakers)
         return jsonify(result)
-
-
-
-class AddSpeaker(Resource):
-    # Add Speaker
+    
     def post(self):
-
         # Get Speaker information
         firstName = request.json['firstName']
         lastName = request.json['lastName']
@@ -99,3 +93,10 @@ class AddSpeaker(Resource):
             newSpeaker.save()
             return speaker_schema.jsonify(newSpeaker)
         return {"message": "could not add speaker to the database"}, 405
+
+        
+
+
+
+
+    
