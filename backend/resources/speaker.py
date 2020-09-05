@@ -38,9 +38,9 @@ class SpeakerAPI(Resource):
         description = request.json['description']
         companyName = request.json['companyName']
         jobTitle = request.json['jobTitle']
-        photo = request.json['photo']
-        socialAccount = request.json['socialAccount']
-        print(firstName,lastName,email,phone,description,companyName,jobTitle,photo,socialAccount)
+        speakerPhoto = request.json['speakerPhoto']
+        website = request.json['website']
+        print(firstName,lastName,email,phone,description,companyName,jobTitle,speakerPhoto,website)
         
 
         if updateSpeaker:
@@ -51,8 +51,8 @@ class SpeakerAPI(Resource):
             updateSpeaker.companyName = companyName
             updateSpeaker.jobTitle = jobTitle
             updateSpeaker.description = description
-            updateSpeaker.photo = photo
-            updateSpeaker.socialAccount = socialAccount
+            updateSpeaker.speakerPhoto = speakerPhoto
+            updateSpeaker.website = website
            
             Speaker.update(updateSpeaker)
             return speaker_schema.jsonify(updateSpeaker)
@@ -82,12 +82,12 @@ class SpeakerListAPI(Resource):
         description = request.json['description']
         companyName = request.json['companyName']
         jobTitle = request.json['jobTitle']
-        photo = request.json['photo']
-        socialAccount = request.json['socialAccount']
+        speakerPhoto = request.json['speakerPhoto']
+        website = request.json['website']
 
         # init object from Speaker class
         newSpeaker = Speaker(firstName=firstName, lastName=lastName, email=email, phone=phone,
-                             description=description, companyName=companyName, jobTitle=jobTitle, photo=photo, socialAccount=socialAccount)
+                             description=description, companyName=companyName, jobTitle=jobTitle, speakerPhoto=speakerPhoto, website=website)
         if newSpeaker:
             # Save to database
             newSpeaker.save()

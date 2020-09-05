@@ -12,8 +12,8 @@ class Speaker(db.Model):
     description = db.Column(db.String(255), nullable=True)
     companyName = db.Column(db.String(140), nullable=True)
     jobTitle = db.Column(db.String(120), nullable=True)
-    speaker_photo = db.Column(db.String(100), nullable=True,default="default.png")
-    socialAccount = db.Column(db.String(200), nullable=True)
+    speakerPhoto = db.Column(db.String(100), nullable=True,default="default.png")
+    website = db.Column(db.String(200), nullable=True)
     workshop = db.relationship('Workshop',
         backref=db.backref('workshop', lazy=True))
 
