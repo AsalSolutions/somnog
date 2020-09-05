@@ -14,12 +14,10 @@ function ContentSection(){
   return (
     <Content
             className="site-layout-background"
-            
             style={{
               margin: '24px 16px',
               padding: 24,
               minHeight: 610,
-              
             }}>
     
             <Route path="/" exact component={Home} />
@@ -27,7 +25,7 @@ function ContentSection(){
             <Route path="/speaker" exact component={SpeakerList} />
             <Route path="/speaker/create" exact component={CreateSpeaker} />
             <Route path="/speaker/edit/:id" exact component={UpdateSpeaker} />
-            <Route path="/speaker/delete/:id" exact component={DeleteSpeaker} />
+            {/* <Route path="/speaker/delete/:id" exact component={DeleteSpeaker} /> */}
     </Content>
   )
     

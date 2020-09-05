@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 import { Modal, Button, Space } from 'antd';
@@ -22,17 +23,17 @@ class DeleteSpeaker extends React.Component {
     return (
       <>
         <Button type="primary" onClick={this.showModal}>
-          Modal
+          Are you Sure you want to delete?
         </Button>
         <Modal
           title="Modal"
           visible={this.state.visible}
           onOk={this.hideModal}
           onCancel={this.hideModal}
-          okText="确认"
-          cancelText="取消"
+          okText="Yes"
+          cancelText="No"
         >
-          <p>Bla bla ...</p>
+          <p>List of speakers</p>
           <p>Bla bla ...</p>
           <p>Bla bla ...</p>
         </Modal>

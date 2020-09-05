@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {connect} from 'react-redux';
 import {setLanguage} from '../actions/setLanguageAction'
@@ -25,9 +26,6 @@ const { SubMenu } = Menu;
        
     )
 }
-
-
-
 
 
 //  Languages

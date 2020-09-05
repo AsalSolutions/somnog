@@ -25,14 +25,14 @@ class Sidebar extends React.Component {
             <Link to="/"> <h1 style={{color:'white',paddingTop:"20px",paddingLeft:"20px",paddingBottom:"25px"}}>SOMNOG APP</h1></Link>
             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1" icon={<BarChartOutlined />}>
-        <Link to="/">{dashboard}</Link>
+            <Link to="/">{dashboard}</Link>
             </Menu.Item>
             <SubMenu key="sub1" icon={<UserOutlined />} title={Speaker}>
                 <Menu.Item key="2" icon={<UserOutlined />}>
                     <Link to="/speaker"> {Speakers}</Link>
                 </Menu.Item>
                 <Menu.Item key="3" icon={<UserAddOutlined />}>
-        <Link to="/speaker/create"> {AddSpeaker}</Link>
+             <Link to="/speaker/create"> {AddSpeaker}</Link>
                 </Menu.Item>
                 
             </SubMenu>

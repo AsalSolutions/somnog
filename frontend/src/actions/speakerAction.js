@@ -43,7 +43,7 @@ export const createSpeaker = (formValues) => {
   return async (dispatch) => {
     try {
       const response = await api.post("/speakers", {
-        ...formValues,
+        ...formValues
       });
       dispatch({ type: CREATE_SPEAKER, payload: response.data });
       sucessAlert("Speaker Added Successfully")

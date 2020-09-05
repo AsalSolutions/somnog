@@ -25,7 +25,7 @@ const layout = {
 const  SpeakerForm = ({onSubmit,initialValues,app}) => {
 
   const validateMessages = {
-    required: app.language === 'English' ?  '${label} is required!' : '${label} Waa loo baahanyahay!',
+    required: app.language === 'EN' ?  '${label} is required!' : '${label} Waa loo baahanyahay!',
     types: {
       email: '${label} is not valid email!',
       number: '${label} is not a valid number!',
@@ -120,10 +120,10 @@ const  SpeakerForm = ({onSubmit,initialValues,app}) => {
       <Form.Item name={'description'} label={description}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={'photo'} label={photo}>
+      <Form.Item name={'speakerPhoto'} label={photo}>
         <Input />
       </Form.Item>
-      <Form.Item name={'socialAccount'} label="Website">
+      <Form.Item name={'website'} label="Website">
         <Input />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
