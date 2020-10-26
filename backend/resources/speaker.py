@@ -79,11 +79,11 @@ class SpeakerListAPI(Resource):
         lastName = request.json['lastName']
         email = request.json['email']
         phone = request.json['phone']
-        description = request.json['description']
+        description = request.json['description'] 
         companyName = request.json['companyName']
         jobTitle = request.json['jobTitle']
-        speakerPhoto = request.json['speakerPhoto']
-        website = request.json['website']
+        speakerPhoto = request.json['speakerPhoto'] 
+        website = request.json['website'] 
 
         # init object from Speaker class
         newSpeaker = Speaker(firstName=firstName, lastName=lastName, email=email, phone=phone,

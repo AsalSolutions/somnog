@@ -10,26 +10,26 @@ workshopSchemas = WorkshopModelSchema(many=True)
 
 class WorkshopAPI(Resource):
     # Get a Single Workshop
-    def get(self,id):
+    def get(self, id):
         workshop = Workshop.query.get(id)
         if workshop:
             return workshopSchema.jsonify(workshop)
-        return ({"message":"Workshop not found"}),404
-    
+        return ({"message": "Workshop not found"}), 404
+
     # Delete a workshop by id
-    def delete(self,id):
+    def delete(self, id):
         workshop = Workshop.query.get(id)
         if workshop:
             workshop.delete()
-            return ({"message":"workshop deleted successfully"}),200
-        return ({"message":"Workshop not found"}),404
+            return ({"message": "workshop deleted successfully"}), 200
+        return ({"message": "Workshop not found"}), 404
 
-    def patch(self,id):
+    def patch(self, id):
         workshop = Workshop.query.get_or_404(id)
         # if 'workshopTitle' in request.json['workshopTitle']:
         #     workshop.workshopTitle = request.json['workshopTitle']
 
-    
+
 class WorkshopListAPI(Resource):
 
     # List all workshops
@@ -50,13 +50,10 @@ class WorkshopListAPI(Resource):
         lecturer_id = request.json['lecturer_id']
 
         # init object from Speaker class
-        newWorkshop = Workshop(workshopTitle=workshopTitle,description=description,location=location,course_image=course_image,lecturer_id=lecturer_id)
+        newWorkshop = Workshop(workshopTitle=workshopTitle, description=description,
+                               location=location, course_image=course_image, lecturer_id=lecturer_id)
         if newWorkshop:
             # Save to database
             newWorkshop.save()
             return workshopSchema.jsonify(newWorkshop)
         return {"message": "could not add workshop to the database"}, 405
-
-
-
-
