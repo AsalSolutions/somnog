@@ -1,27 +1,26 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import SpeakerForm from './SpeakerForm'
-import { createSpeaker } from "../../actions/speakerAction";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import SpeakerForm from './SpeakerForm';
+import { createSpeaker } from '../../actions/speakerAction';
 
 class CreateSpeaker extends Component {
-  onSubmit = (formValues) => {
-    // this.props.createSpeaker(formValues);
-     this.props.createSpeaker(formValues);
+  onSubmitHandler = (formValues) => {
+    this.props.createSpeaker(formValues);
   };
-  
+
   render() {
-    // const text = localStorage.getItem("language") === 'EN' ? 'Add Speaker' : 'Ku dar Soo Jeediye';
-    const text = this.props.app.language === 'EN' ? 'Add Speaker' : 'Diiwaan Gali Speaker'
+    const text =
+      this.props.app.language === 'EN' ? 'Add Speaker' : 'Diiwaan Gali Speaker';
     return (
       <div>
         <h2>{text}</h2>
-        <SpeakerForm onSubmit={this.onSubmit}/>
+        <SpeakerForm onSubmit={this.onSubmitHandler} />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { app: state.language };
 };
 

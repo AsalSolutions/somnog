@@ -1,5 +1,6 @@
-import React from "react"; 
-import {connect} from 'react-redux';
+/* eslint-disable no-template-curly-in-string */
+import React from 'react';
+import { connect } from 'react-redux';
 import { Form, Input, Button } from 'antd';
 
 const layout = {
@@ -11,7 +12,7 @@ const layout = {
   },
 };
 
-// we need this fields 
+//? We need these fields
 // LastName
 // Email
 // Phone
@@ -21,11 +22,12 @@ const layout = {
 // Photo Url
 // Social Account
 
-
-const  SpeakerForm = ({onSubmit,initialValues,app}) => {
-
+const SpeakerForm = ({ onSubmit, initialValues, app }) => {
   const validateMessages = {
-    required: app.language === 'EN' ?  '${label} is required!' : '${label} Waa loo baahanyahay!',
+    required:
+      app.language === 'EN'
+        ? '${label} is required!'
+        : '${label} Waa loo baahanyahay!',
     types: {
       email: '${label} is not valid email!',
       number: '${label} is not a valid number!',
@@ -37,23 +39,27 @@ const  SpeakerForm = ({onSubmit,initialValues,app}) => {
 
   const submitValues = (formValues) => {
     onSubmit(formValues);
-    console.log(formValues)
-    
   };
-  
+
   // Form Fields Translation
-  const firstName  = app.language === 'EN' ? "First Name" : "Magaca Koobaad";
-  const lastName = localStorage.getItem("language") === "EN" ? "Last Name" : "Magaca Labaad";
-  const companyName  = app.language === 'EN' ? "Company Name" : "Magaca Shirkadda";
-  const jobTitle  = app.language === 'EN' ? "Job Title" : "Xilka Shaqo";
-  const photo = app.language === "EN" ? "Photo " : "Gali Sawir";
-  const description  = app.language === 'EN' ? "Description" : "Faah Faahin";
-  const submit = app.language === 'EN' ? "Submit" : "Dir";
- 
+  const firstName = app.language === 'EN' ? 'First Name' : 'Magaca Koobaad';
+  const lastName =
+    localStorage.getItem('language') === 'EN' ? 'Last Name' : 'Magaca Labaad';
+  const companyName =
+    app.language === 'EN' ? 'Company Name' : 'Magaca Shirkadda';
+  const jobTitle = app.language === 'EN' ? 'Job Title' : 'Xilka Shaqo';
+  const photo = app.language === 'EN' ? 'Photo ' : 'Gali Sawir';
+  const description = app.language === 'EN' ? 'Description' : 'Faah Faahin';
+  const submit = app.language === 'EN' ? 'Submit' : 'Dir';
 
   return (
-   
-    <Form {...layout} name="nest-messages" onFinish={submitValues} validateMessages={validateMessages} initialValues={initialValues}>
+    <Form
+      {...layout}
+      name="nest-messages"
+      onFinish={submitValues}
+      validateMessages={validateMessages}
+      initialValues={initialValues}
+    >
       <Form.Item
         name={'firstName'}
         label={firstName}
@@ -87,11 +93,7 @@ const  SpeakerForm = ({onSubmit,initialValues,app}) => {
       >
         <Input />
       </Form.Item>
-      <Form.Item
-        name={'phone'}
-        label="Phone"
-       
-      >
+      <Form.Item name={'phone'} label="Phone">
         <Input />
       </Form.Item>
       <Form.Item
@@ -116,7 +118,6 @@ const  SpeakerForm = ({onSubmit,initialValues,app}) => {
       >
         <Input />
       </Form.Item>
-      
       <Form.Item name={'description'} label={description}>
         <Input.TextArea />
       </Form.Item>
@@ -126,7 +127,12 @@ const  SpeakerForm = ({onSubmit,initialValues,app}) => {
       <Form.Item name={'website'} label="Website">
         <Input />
       </Form.Item>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+      <Form.Item
+        wrapperCol={{
+          ...layout.wrapperCol,
+          offset: 8,
+        }}
+      >
         <Button type="primary" htmlType="submit">
           {submit}
         </Button>
@@ -135,11 +141,10 @@ const  SpeakerForm = ({onSubmit,initialValues,app}) => {
   );
 };
 
-const mapStateToProps = state => {
-  return { app: state.language };
+const mapStateToProps = (state) => {
+  return {
+    app: state.language,
+  };
 };
 
-
-
 export default connect(mapStateToProps)(SpeakerForm);
-  

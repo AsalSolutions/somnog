@@ -1,20 +1,17 @@
-import React from "react";
-import _uniqueId from "lodash/uniqueId";
-import { Table, Space, Modal,Button } from 'antd';
+import React from 'react';
+import { Table, Space, Modal, Button } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { getSpeakers } from "../../actions/speakerAction";
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getSpeakers } from '../../actions/speakerAction';
 
 const { confirm } = Modal;
-
-
 const columns = [
   {
     title: 'First Name',
     dataIndex: 'firstName',
     key: 'firstName',
-    render: text => <Link to={`speaker/${text}`}>{text}</Link>,
+    render: (text) => <Link to={`speaker/${text}`}> {text} </Link>,
   },
   {
     title: 'Last Name',
@@ -41,21 +38,21 @@ const columns = [
     dataIndex: 'jobTitle',
     key: 'jobTitle',
   },
- 
+
   {
     title: 'Action',
     key: 'action',
-    render: record => (
-      
+    render: (record) => (
       <Space size="middle">
-        <Link to={`speaker/view/${record.key}`}>View</Link>
-        <Link to={`speaker/edit/${record.key}`}>Update </Link>
-        <Link to={`speaker/delete/${record.key}`}>  <Button onClick={showDeleteConfirm}>Delete</Button></Link>
+        <Link to={`speaker/view/${record.id}`}> View </Link>{' '}
+        <Link to={`speaker/edit/${record.id}`}> Update </Link>{' '}
+        <Link to={`speaker/delete/${record.id}`}>
+          <Button onClick={showDeleteConfirm}> Delete </Button>{' '}
+        </Link>{' '}
       </Space>
     ),
   },
 ];
-
 
 class SpeakerList extends React.Component {
   componentDidMount() {
@@ -63,34 +60,29 @@ class SpeakerList extends React.Component {
   }
 
   speakerList = () => {
-    
     const { getAllSpeakers } = this.props;
     if (!getAllSpeakers) {
-      return "loading";
+      return 'loading';
     }
     return getAllSpeakers.map((speaker) => {
-    
-      const speakerList = 
-        {
-          key: speaker._id,
-          firstName: speaker.firstName,
-          lastName: speaker.lastName,
-          email:speaker.email,
-          phone:speaker.phone,
-          companyName: speaker.companyName,
-          jobTitle:speaker.jobTitle,
-        };
-        
-      return  speakerList 
+      const speakerList = {
+        id: speaker._id,
+        firstName: speaker.firstName,
+        lastName: speaker.lastName,
+        email: speaker.email,
+        phone: speaker.phone,
+        companyName: speaker.companyName,
+        jobTitle: speaker.jobTitle,
+      };
+      return speakerList;
     });
   };
+
   render() {
-  
     return (
       <React.Fragment>
-        <h3>Speakers List</h3>
-        <Table columns={columns} dataSource={this.speakerList()} rowKey={_uniqueId()}/>
-        {/* <React.Table columns={columns} data={this.speakerList}></React.Table> */}
+        <h3> Speakers List </h3>
+        <Table columns={columns} dataSource={this.speakerList()} rowKey="id" />
       </React.Fragment>
     );
   }
@@ -99,15 +91,16 @@ class SpeakerList extends React.Component {
 // Map state to props
 const mapStateToProps = (state) => {
   return {
-    getAllSpeakers: Object.values(state.speakers)
+    // We convert  object to an array so that we can map through
+    getAllSpeakers: Object.values(state.speakers),
   };
 };
 
-// Delete Speaker 
+// Delete Speaker
 
 function showDeleteConfirm() {
   confirm({
-    title: 'Are you sure delete this task?',
+    title: 'Are you sure delete this Speaker?',
     icon: <ExclamationCircleOutlined />,
     content: 'Some descriptions',
     okText: 'Yes',
@@ -117,11 +110,11 @@ function showDeleteConfirm() {
       console.log('OK');
     },
     onCancel() {
-     return <Link to="/speaker"> </Link>
+      return <Link to="/speaker"> </Link>;
     },
   });
 }
 
-
-export default connect(mapStateToProps, { getSpeakers })(SpeakerList);
-
+export default connect(mapStateToProps, {
+  getSpeakers,
+})(SpeakerList);
