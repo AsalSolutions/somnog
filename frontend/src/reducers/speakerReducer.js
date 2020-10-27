@@ -1,5 +1,6 @@
 import mapKeys from 'lodash/mapKeys';
 import omit from 'lodash/omit';
+
 import {
   CREATE_SPEAKER,
   DELETE_SPEAKER,

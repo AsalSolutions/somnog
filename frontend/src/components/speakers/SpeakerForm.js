@@ -88,12 +88,21 @@ const SpeakerForm = ({ onSubmit, initialValues, app }) => {
         rules={[
           {
             type: 'email',
+            required: true,
           },
         ]}
       >
         <Input />
       </Form.Item>
-      <Form.Item name={'phone'} label="Phone">
+      <Form.Item
+        name={'phone'}
+        label="Phone"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
         <Input />
       </Form.Item>
       <Form.Item
