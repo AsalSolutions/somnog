@@ -1,10 +1,10 @@
 from datetime import datetime
 from db import db, mm
 
-class Workshop(db.Model):
-    __tablename__ = "workshops"
+class WorkshopTrack(db.Model):
+    __tablename__ = "tracks"
     id = db.Column(db.Integer, primary_key=True)
-    workshopTitle = db.Column(db.String(150), nullable=False)
+    name = db.Column(db.String(150), nullable=False)
     description = db.Column(db.Text)
     startDate = db.Column(db.DateTime, nullable=True,default=datetime.utcnow())
     endDate = db.Column(db.DateTime, nullable=True,default=datetime.utcnow())
@@ -15,7 +15,7 @@ class Workshop(db.Model):
         nullable=False)
 
     def __repr__(self):
-        return f"Workshop: {self.workshopTitle} {self.startDate} {self.endDate} {self.course_image}"
+        return f"WorkshopTrack: {self.workshopTitle} {self.startDate} {self.endDate} {self.course_image}"
 
 
     def save(self):
