@@ -1,6 +1,4 @@
-== SomNOG App
-
-The will contain three sections 
+== SomNOG Event Management App
 
  - Backend  - Python(Flask)
  - Database - MySQL
