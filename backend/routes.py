@@ -17,22 +17,18 @@ def runApp():
 
 def speakersAPI():
     # This api updates,deletes and gets single speaker information
-    api.add_resource(SpeakerAPI, '/api/v1.0/speakers/<id>', endpoint="speaker")
+    api.add_resource(SpeakerAPI, '/api/v1.0/speakers/<id>')
     # Fetches All speakers and adds new speakers to the api
-    api.add_resource(SpeakerListAPI, '/api/v1.0/speakers', endpoint="speakers")
-    # Get Total Speaker Count
-    api.add_resource(TotalSpeakers, '/api/v1.0/speakers/count')
+    api.add_resource(SpeakerListAPI, '/api/v1.0/speakers')
 
 
 def users_endpoint():
-    # This api updates,deletes and gets single speaker information
-    api.add_resource(UsersAPI, '/api/v1.0/users/<id>', endpoint="user")
-    # Fetches All speakers and adds new speakers to the api
-    api.add_resource(GetAndPostUsers, '/api/v1.0/users', endpoint="users")
+    # This api updates,deletes and gets single user information
+    api.add_resource(UsersAPI, '/api/v1.0/users/<id>')
+    # Fetches All users and POSTs new users to the api
+    api.add_resource(GetAndPostUsers, '/api/v1.0/users')
 
 
 def workshopsAPI():
-    api.add_resource(WorkshopAPI, "/api/v1.0/workshops/<id>",
-                     endpoint="workshop")
-    api.add_resource(WorkshopListAPI, "/api/v1.0/workshops",
-                     endpoint="workshops")
+    api.add_resource(WorkshopAPI, "/api/v1.0/workshops/<id>")
+    api.add_resource(WorkshopListAPI, "/api/v1.0/workshops")
