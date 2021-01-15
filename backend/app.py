@@ -1,8 +1,8 @@
 from flask_cors import CORS, cross_origin
-from routes import speakersAPI, runApp, workshopsAPI
+from routes import speakersAPI, runApp, workshopsAPI, users_endpoint
 from db import app
 
-# This should be removed on production
+# !This should be removed on production
 CORS(app)
 
 
@@ -12,10 +12,11 @@ def index():
     return {"name": "Somnog App", "description": text}
 
 
-# Get routes  Api 
+# Endpoints
 # Speaker Api
 speakersAPI()
 workshopsAPI()
+users_endpoint()
 
 
 # Main

@@ -1,6 +1,6 @@
 from flask_bcrypt import generate_password_hash, check_password_hash
 from datetime import datetime
-from db import db
+from db import db, mm
 
 
 class User(db.Model):
@@ -52,3 +52,8 @@ class Role(db.Model):
 
     def __repr__(self):
         return(f"{__class__.__name__} {self.name}")
+
+
+class UserSchema(mm.Schema):
+    class Meta:
+        fields = ('id', 'username', 'email', 'role.name')
