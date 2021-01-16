@@ -12,9 +12,9 @@ import {
 export const speakerReducer = (state = {}, action) => {
   switch (action.type) {
     case CREATE_SPEAKER:
-      return { ...state, [action.payload._id]: [action.payload] };
+      return { ...state, [action.payload.id]: [action.payload] };
     case GET_SPEAKERS:
-      return { ...state, ...mapKeys(action.payload, '_id') };
+      return { ...state, ...mapKeys(action.payload, 'id') };
     case GET_SPEAKER:
       return { ...state, [action.payload.id]: action.payload };
     case DELETE_SPEAKER:

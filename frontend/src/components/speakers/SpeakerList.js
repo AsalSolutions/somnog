@@ -71,13 +71,13 @@ class SpeakerList extends React.Component {
     }
     return getAllSpeakers.map((speaker) => {
       const speakerList = {
-        id: speaker._id,
-        firstName: speaker.firstName,
-        lastName: speaker.lastName,
+        id: speaker.id,
+        firstName: speaker.first_name,
+        lastName: speaker.last_name,
         email: speaker.email,
         phone: speaker.phone,
-        companyName: speaker.companyName,
-        jobTitle: speaker.jobTitle,
+        companyName: speaker.company_name,
+        jobTitle: speaker.job_title,
       };
       return speakerList;
     });

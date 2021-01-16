@@ -61,7 +61,7 @@ const SpeakerForm = ({ onSubmit, initialValues, app }) => {
       initialValues={initialValues}
     >
       <Form.Item
-        name={'firstName'}
+        name={'first_name'}
         label={firstName}
         rules={[
           {
@@ -72,7 +72,7 @@ const SpeakerForm = ({ onSubmit, initialValues, app }) => {
         <Input />
       </Form.Item>
       <Form.Item
-        name={'lastName'}
+        name={'last_name'}
         label={lastName}
         rules={[
           {
@@ -106,7 +106,7 @@ const SpeakerForm = ({ onSubmit, initialValues, app }) => {
         <Input />
       </Form.Item>
       <Form.Item
-        name={'companyName'}
+        name={'company_name'}
         label={companyName}
         rules={[
           {
@@ -117,7 +117,7 @@ const SpeakerForm = ({ onSubmit, initialValues, app }) => {
         <Input />
       </Form.Item>
       <Form.Item
-        name={'jobTitle'}
+        name={'job_title'}
         label={jobTitle}
         rules={[
           {
@@ -130,7 +130,7 @@ const SpeakerForm = ({ onSubmit, initialValues, app }) => {
       <Form.Item name={'description'} label={description}>
         <Input.TextArea />
       </Form.Item>
-      <Form.Item name={'speakerPhoto'} label={photo}>
+      <Form.Item name={'speaker_photo'} label={photo}>
         <Input />
       </Form.Item>
       <Form.Item name={'website'} label="Website">
