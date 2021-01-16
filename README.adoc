@@ -1,8 +1,5 @@
-== SomNOG App
+== SomNOG Event Management App
 
-The will contain three sections 
-
- - Backend  - Python(Flask)
- - Database - MySQL
+ - Backend  - Python
  - Frontend - Javascript(React/Redux)
- - Mobile App  - IOS/Android (Dart/Flutter)
+
