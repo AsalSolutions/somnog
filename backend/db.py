@@ -7,7 +7,6 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 
-
 load_dotenv()
 
 # Get Database Details from .env file
@@ -20,6 +19,9 @@ app = Flask(__name__)
 # Init Bcrypt
 bcrypt = Bcrypt(app)
 app.config['JWT_SECRET_KEY'] = os.getenv("JWT_SECRET")
+# blacklisting TOKENS   When Users LoggedOut
+app.config['JWT_BLACKLIST_ENABLED'] = True
+app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
 # Init Json Web Token
 jwt = JWTManager(app)
 # DB Configuration

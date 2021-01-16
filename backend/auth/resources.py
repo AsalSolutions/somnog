@@ -2,13 +2,13 @@ from flask import request, jsonify
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import (create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
-from auth.User import User, Role, UserSchema
-from db import db
+from auth.User import User, Role, UserSchema, RevokedTokenModel
+from db import db, jwt
 
 
+# Database Model Serializers
 user_schema = UserSchema()
 user_schemas = UserSchema(many=True)
-
 
 # Reqparse
 parser = reqparse.RequestParser()
@@ -17,6 +17,13 @@ parser.add_argument(
 parser.add_argument('email', help='This field cannot be blank', required=True)
 parser.add_argument(
     'password', help='This field cannot be blank', required=True)
+
+
+# Check Blacklisted Tokens
+@jwt.token_in_blacklist_loader
+def check_if_token_in_blacklist(decrypted_token):
+    jti = decrypted_token['jti']
+    return RevokedTokenModel.is_jti_blacklisted(jti)
 
 
 class UsersAPI(Resource):
@@ -129,21 +136,53 @@ class UserLogin(Resource):
 
 
 class UserLogoutAccess(Resource):
+    @jwt_required
     def post(self):
-        return {'message': 'User logout'}
+        jti = get_raw_jwt()['jti']
+        try:
+            revoked_token = RevokedTokenModel(jti=jti)
+            revoked_token.add()
+            return {'message': 'Access token has been revoked'}
+        except:
+            return {'message': 'Something went wrong'}, 500
 
 
 class UserLogoutRefresh(Resource):
+    @jwt_refresh_token_required
     def post(self):
-        return {'message': 'User logout'}
+        jti = get_raw_jwt()['jti']
+        try:
+            revoked_token = RevokedTokenModel(jti=jti)
+            revoked_token.add()
+            return {'message': 'Refresh token has been revoked'}
+        except:
+            return {'message': 'Something went wrong'}, 500
 
 
 class TokenRefresh(Resource):
+    """ 
+    tokens have an expiration date. By default, access tokens have 15 minutes lifetime, 
+    refresh tokens — 30 days. In order not to ask users to log in too often after access 
+    token expiration we can reissue new access token using refresh token
+    """
+    @jwt_refresh_token_required
     def post(self):
-        return {'message': 'Token refresh'}
+        """
+            first of all, this resource has jwt_refresh_token_required decorator,
+            which means that you can access this path only using refresh token.
+            By the way, you cannot access jwt_required endpoints using refresh token,
+            and you cannot access jwt_refresh_token_required endpoints using access token.
+            This adds an additional layer of security. To identify user we use helper 
+            function get_jwt_identity() which extract identity from refresh token. 
+            Then we use this identity to generate a new access token and return it to the user.
+        """
+        current_user = get_jwt_identity()
+        access_token = create_access_token(identity=current_user)
+        return {'access_token': access_token}
 
 
 class SecretResource(Resource):
+    @jwt_required
     def get(self):
         return {
             'answer': 42
