@@ -18,13 +18,23 @@ class User(db.Model):
     created_date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
 
-    def create(self):
+    def save(self):
         db.session.add(self)
         db.session.commit()
 
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
+    #! Delete All
+    @classmethod
+    def delete_all(cls):
+        try:
+            num_rows_deleted = db.session.query(cls).delete()
+            db.session.commit()
+            return {'message': f'{num_rows_deleted} row(s) deleted'}
+        except:
+            return {'message': 'Something went wrong'}
 
     def update(self):
         db.session.commit()

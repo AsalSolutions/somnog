@@ -19,6 +19,7 @@ dbPassword = os.getenv("DB_PASSWORD")
 app = Flask(__name__)
 # Init Bcrypt
 bcrypt = Bcrypt(app)
+app.config['JWT_SECRET_KEY'] = os.getenv("JWT_SECRET")
 # Init Json Web Token
 jwt = JWTManager(app)
 # DB Configuration
