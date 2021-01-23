@@ -7,7 +7,7 @@ import {
   UPDATE_SPEAKER,
   GET_SPEAKER,
   GET_SPEAKERS,
-} from '../actions/types';
+} from '../constants/types';
 
 export const speakerReducer = (state = {}, action) => {
   switch (action.type) {

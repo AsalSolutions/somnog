@@ -1,6 +1,6 @@
-import { message } from 'antd';
-import api from '../api';
-import history from '../history';
+import { api } from '../api';
+import history from '../helpers/history';
+import { sucessAlert, errorAlert } from './alerts';
 
 import {
   CREATE_SPEAKER,
@@ -8,16 +8,7 @@ import {
   UPDATE_SPEAKER,
   GET_SPEAKER,
   GET_SPEAKERS,
-} from './types';
-
-// Alerts
-
-const sucessAlert = (text) => {
-  message.success(text);
-};
-const errorAlert = (text) => {
-  message.error(text);
-};
+} from '../constants/types';
 
 // Get all speakers
 export const getSpeakers = () => {
@@ -72,7 +63,6 @@ export const updateSpeaker = (id, formValues) => async (dispatch) => {
 };
 
 // Get a single speaker
-// Get a sigle stream
 export const getSpeaker = (id) => async (dispatch) => {
   const response = await api.get(`/speakers/${id}`);
   dispatch({ type: GET_SPEAKER, payload: response.data });
