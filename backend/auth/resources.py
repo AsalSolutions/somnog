@@ -1,9 +1,38 @@
+import datetime
 from flask import request, jsonify
 from flask_restful import Resource, reqparse
-from flask_jwt_extended import (create_access_token, create_refresh_token,
+from flask_jwt_extended import (verify_jwt_in_request, get_jwt_claims, create_access_token, create_refresh_token,
                                 jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+from functools import wraps
 from auth.User import User, Role, UserSchema, RevokedTokenModel
 from db import db, jwt
+
+"""TODO:
+get authorization header from the react app
+and verify then allow it to access
+token = request.headers['authorization'].split(" ")[1]
+verify_jwt_token(token,'access_token')
+then do staff
+ """
+
+# Custome JWT Decorator For Admin Users
+
+
+def admin_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        verify_jwt_in_request()
+        role = Role.query.filter_by(name="Admin").first()
+        # Check if if the current user is Admin
+        current_user = User.query.filter_by(
+            username=get_jwt_identity()).first()
+        # Only then this we can perform admin tasks
+        if current_user.role.name == role.name:
+            return fn(*args, **kwargs)
+        else:
+            return {"msg": "You're NOT allowed to perform this action!"}, 403
+
+    return wrapper
 
 
 # Database Model Serializers
@@ -27,14 +56,15 @@ def check_if_token_in_blacklist(decrypted_token):
 
 
 class UsersAPI(Resource):
-
+    @jwt_required
     def get(self, id):
         user = User.query.get(id)
         if user:
-            return user_schema.jsonify(user)
-        return ({"message": "User not found"}), 404
+            user_data = user_schema.dump(user)
+            return ({'success': True, **user_data}), 200
+        return ({"success": False, "message": "User not found"}), 404
 
-    # !Permission required to modify this endpoint
+    @admin_required
     def delete(self, id):
         current_user = User.query.get(id)
         if current_user:
@@ -43,7 +73,7 @@ class UsersAPI(Resource):
 
         return ({"message": "User not found"}), 404
 
-    # !Permission required to modify this endpoint
+    @admin_required
     def put(self, id):
 
         current_user = User.query.get(id)
@@ -76,6 +106,7 @@ class GetAndPostUsers(Resource):
         print(result)
         return jsonify(result)
 
+    @admin_required
     def post(self):
         data = parser.parse_args()
         username = data['username']
@@ -96,15 +127,16 @@ class GetAndPostUsers(Resource):
             # Save to database
             current_user.save()
             # Create Access token if user created successfully
-            access_token = create_access_token(identity=username)
-            refresh_token = create_refresh_token(identity=username)
+            # expires = datetime.timedelta(days=5)  # Token Expiration
+            # access_token = create_access_token(
+            #     identity=current_user.id, expires_delta=expires)
+            # refresh_token = create_refresh_token(identity=current_user.id)
             return {
-                'message': f'User {username} was created',
-                'access_token': access_token,
-                'refresh_token': refresh_token
-            }
+                'success': True,
+                'message': f'User {username} was created. Please log in',
+            }, 201
             # return user_schema.jsonify(current_user)
-        return {"message": "could not add user to the database"}, 405
+        return {"success": False, "message": "could not add user to the database"}, 405
 
 
 class UserLogin(Resource):
@@ -114,6 +146,8 @@ class UserLogin(Resource):
         password = data['password']
         current_user = User.find_by_email(email)
 
+        # set session http only
+
         # Check if email exists
         if not current_user:
             return {'message': 'Invalid email or password'}
@@ -122,17 +156,22 @@ class UserLogin(Resource):
             # Create Access token if user created successfully
             # !Access token we need to access protected routes.
             #! Refresh token we need to reissue access token when it will expire.
-            access_token = create_access_token(identity=current_user.username)
+            expires = datetime.timedelta(days=5)  # Token Expiration
+            payload = {'payload': {
+                'role': current_user.role.name,
+                'id': current_user.id
+            }}
+            access_token = create_access_token(
+                identity=payload, expires_delta=expires)
             refresh_token = create_refresh_token(
-                identity=current_user.username)
+                identity=current_user.id)
             return {
-                'message': f'Logged in as {current_user.username}',
+                'success': True,
+                'role': current_user.role.name,
                 'access_token': access_token,
                 'refresh_token': refresh_token
             }
-
-        else:
-            return {'message': 'Invalid email or password'}
+        return {'success': False, 'message': 'Invalid email or password'}
 
 
 class UserLogoutAccess(Resource):
@@ -142,9 +181,13 @@ class UserLogoutAccess(Resource):
         try:
             revoked_token = RevokedTokenModel(jti=jti)
             revoked_token.add()
-            return {'message': 'Access token has been revoked'}
+            return {
+                'success': True,
+                'message': 'Access token has been revoked'}, 200
         except:
-            return {'message': 'Something went wrong'}, 500
+            return {
+                'success': False,
+                'message': 'Something went wrong'}, 500
 
 
 class UserLogoutRefresh(Resource):
