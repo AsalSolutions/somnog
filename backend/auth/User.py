@@ -40,6 +40,7 @@ class User(db.Model):
         db.session.commit()
 
     @classmethod
+    # Get user by email     
     def find_by_email(cls, email):
         return cls.query.filter_by(email=email).first()
 
